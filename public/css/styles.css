@@ -1,0 +1,171 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #121212;
+    color: white;
+    padding-top: 60px; /* To avoid navbar overlap */
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.navbar-link {
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar-link:hover {
+    text-decoration: underline;
+}
+
+/* Section Styles */
+section {
+    padding: 50px 20px;
+    margin: 80px 0;
+}
+
+#home {
+    background-color: #222;
+}
+
+#about-us {
+    background-color: #2c2c2c;
+}
+
+#testimonials {
+    background-color: #333;
+}
+
+#contact {
+    background-color: #444;
+}
+
+/* Video Gallery */
+.video-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.video-item {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.video-item:hover {
+    transform: scale(1.1);
+}
+
+/* Testimonials Section */
+.reviews-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .review-container {
+    background-color: #f7f7f7;
+    padding: 20px;
+    margin: 10px;
+    width: 300px; /* Decreased width to make reviews narrower horizontally */
+    height: 400px; /* Increased height to make reviews longer vertically */
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .review-container h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .review-container p {
+    font-size: 16px;
+    color: #666;
+    flex: 1; /* Make the paragraph take up the remaining space */
+  }
+.review {
+    background-color: white;
+    color: black;
+    padding: 1rem;
+    margin: 1rem;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.contact-us {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px auto;
+    width: 80%;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .contact-us h2 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .contact-us form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contact-us label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #666;
+  }
+  
+  .contact-us input, .contact-us textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f7f7f7;
+  }
+  
+  .contact-us textarea {
+    height: 100px;
+  }
+  
+  .contact-us button[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .contact-us button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
