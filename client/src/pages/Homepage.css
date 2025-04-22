@@ -1,0 +1,11 @@
+.custom-splitter .ant-splitter-bar-dragger {
+    background-color: white;
+    width: 1px !important; /* Make it as thin as possible */
+    min-width: 1px !important; /* Prevent it from expanding */
+    max-width: 1px !important;
+    margin: 0 !important;
+}
+
+.custom-splitter .ant-splitter-panel {
+    overflow: hidden;
+}
