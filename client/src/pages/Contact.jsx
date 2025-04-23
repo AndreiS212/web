@@ -8,8 +8,8 @@ const { Title, Text } = Typography;
 
 const Contact = () => {
     return (
-        <Layout style={{ minHeight: '100vh', background: '#000' }}>
-            <Header style={{ display: 'flex', alignItems: 'center', background: '#000', justifyContent: 'space-between' }}>
+        <Layout style={{ minHeight: '100vh', background: '#f7e7e7' }}>
+            <Header style={{ display: 'flex', alignItems: 'center', background: '#f7e7e7', justifyContent: 'space-between' }}>
                 <div className="demo-logo" />
                 <Menu
                     theme="dark"
@@ -29,7 +29,7 @@ const Contact = () => {
                             label: <Link to="/contact">Contact</Link>,
                         },
                     ]}
-                    style={{ flex: 1, minWidth: 0, background: '#000' }}
+                    style={{ flex: 1, minWidth: 0, background: '#f7e7e7' }}
                 />
                 <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
                     <Link to="/">
@@ -42,10 +42,10 @@ const Contact = () => {
                 </div>
             </Header>
 
-            <Content style={{ padding: '0 48px', background: '#000', marginTop: '60px' }}>
+            <Content style={{ padding: '0 48px', background: '#f7e7e7', marginTop: '60px' }}>
                 <div
                     style={{
-                        background: '#1a1a1a',
+                        background: '#f7e7e7',
                         minHeight: 280,
                         padding: 24,
                         borderRadius: 8,

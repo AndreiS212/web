@@ -1,0 +1,119 @@
+import React, { useState, useEffect } from 'react';
+
+const VideoThumbnailPlayer = ({ videoId, style, overlayText }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [thumbnail, setThumbnail] = useState('');
+
+  const handlePlay = () => {
+    setIsPlaying(true);
+  };
+
+  // Use vimeo's HD thumbnail URL
+  const thumbnailUrl = `https://vumbnail.com/${videoId}.jpg`; // Regular thumbnail
+
+  // Fetch the thumbnail when the component mounts
+  useEffect(() => {
+    // Here you can make additional requests if necessary to fetch the highest quality thumbnail
+    setThumbnail(thumbnailUrl); // In this case, the thumbnail URL is set directly
+  }, [videoId]);
+
+  // Set explicit container dimensions (optional, adjust as needed)
+  const containerStyle = {
+    position: 'relative',
+    width: '100%',
+    height: '70%',
+    maxHeight: '500px',
+    backgroundColor: 'transparent',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '72px',
+    ...style,
+  };
+
+  const thumbnailStyle = {
+    backgroundImage: `url(${thumbnail})`,
+    backgroundSize: 'cover', // Ensures the image fills the container
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    width: '100%',
+    height: '100%',
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
+
+  return (
+      <div style={containerStyle}>
+        {!isPlaying ? (
+            <div
+                style={thumbnailStyle}
+                onClick={handlePlay}
+            >
+              {/*<div*/}
+              {/*    style={{*/}
+              {/*      alignItems: 'center',*/}
+              {/*      justifyContent: 'center',*/}
+              {/*      marginLeft: '50px',*/}
+              {/*      marginTop: '90px',*/}
+              {/*      top: '20px',*/}
+              {/*      left: '50%',*/}
+              {/*      transform: 'translateX(-50%)',*/}
+              {/*      color: '#fff',*/}
+              {/*      fontFamily: '"Playwrite RO", cursive',*/}
+              {/*      fontSize: '32px',*/}
+              {/*      fontWeight: 'bold',*/}
+              {/*      textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',*/}
+              {/*      zIndex: 2,*/}
+              {/*    }}*/}
+              {/*>*/}
+              {/*  {overlayText}*/}
+              {/*</div>*/}
+              <button
+                  style={{
+                    background: 'transparent',
+                    border: '3px solid #fff',
+                    borderRadius: '50%',
+                    padding: '15px',
+                    cursor: 'pointer',
+                    fontSize: '24px',
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    outline: 'none',
+                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                  }}
+                  onMouseDown={e => e.preventDefault()}
+                  onMouseEnter={(e) => {
+                    e.target.style.transform = 'scale(1.1)';
+                    e.target.style.boxShadow = '0 6px 15px rgba(0, 0, 0, 0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.transform = 'scale(1)';
+                    e.target.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
+                  }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="white">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </button>
+            </div>
+        ) : (
+            <iframe
+                src={`https://player.vimeo.com/video/${videoId}?autoplay=1`}
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                allow="autoplay; fullscreen"
+                allowFullScreen
+            ></iframe>
+        )}
+      </div>
+  );
+};
+
+export default VideoThumbnailPlayer;

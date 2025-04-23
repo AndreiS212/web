@@ -1,11 +1,79 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
 .custom-splitter .ant-splitter-bar-dragger {
     background-color: white;
-    width: 1px !important; /* Make it as thin as possible */
-    min-width: 1px !important; /* Prevent it from expanding */
+    width: 1px !important;
+    min-width: 1px !important;
     max-width: 1px !important;
     margin: 0 !important;
+    height: 70% !important;
 }
 
 .custom-splitter .ant-splitter-panel {
     overflow: hidden;
+}
+
+.custom-menu .ant-menu-item {
+    background: transparent !important;
+    padding: 0 20px; /* adjust spacing as needed */
+    height: auto;
+    line-height: normal;
+}
+
+.custom-menu .ant-menu-item:hover {
+    background: rgb(109, 107, 107) !important; /* subtle hover effect */
+}
+
+.custom-menu .ant-menu-item-selected {
+    background: transparent !important;
+    border-bottom: 2px solid white; /* optional underline for active tab */
+}
+
+.names {
+    font-size: 35px;
+    color: white;
+    text-transform: none;
+    font-family: "Playwrite RO", cursive;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
+p {
+    color: white;
+}
+
+/* Footer Styles */
+.ant-layout-footer {
+    background: linear-gradient(to right, #2f2f2f, #000);
+    color: #fff;
+    padding: 40px 0;
+    font-family: 'Segoe UI';
+    text-align: center;
+    border-top: 1px solid #d2b6a2;
+}
+
+.ant-layout-footer a {
+    color: #d2b6a2;
+    text-decoration: none;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+.ant-layout-footer a:hover {
+    color: #fff;
+}
+
+.ant-layout-footer i {
+    font-size: 18px;
+    margin-right: 20px;
+    transition: color 0.3s ease;
+}
+
+.ant-layout-footer i:hover {
+    color: #d2b6a2;
+}
+
+html {
+    scroll-behavior: smooth;
 }

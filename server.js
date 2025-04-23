@@ -17,7 +17,8 @@ connectDB();
 const app = express();
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+const path = require("path");
+app.use(express.static(path.join(__dirname, "client/build")));
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -74,7 +75,7 @@ app.post('/contact', (req, res) => {
 });
 
 // Home route - Fetch both videos and reviews from the database
-app.get("/", async (req, res) => {
+app.get("*", async (req, res) => {
   console.log(" Home route hit");
   try {
     const videos = await Video.find() || [];
@@ -82,7 +83,8 @@ app.get("/", async (req, res) => {
 
     console.log("Reviews: ", reviews);
 
-    res.render('index', { videos, reviews });
+    // res.render("index", { homepage, videos, reviews });
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
   } catch (err) {
     console.error(err);
     res.status(500).send("Server error");
