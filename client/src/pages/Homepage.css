@@ -13,25 +13,71 @@
     overflow: hidden;
 }
 
+/* Ensure the menu itself has no background and border */
+.custom-menu {
+    background: transparent !important; /* Remove background */
+    border: none !important; /* Remove any border around the entire menu */
+    box-shadow: none !important; /* Remove any shadow around the menu */
+    width: 700px;
+}
+
+/* Remove any rectangle or background from menu items */
 .custom-menu .ant-menu-item {
-    background: transparent !important;
-    padding: 0 20px; /* adjust spacing as needed */
+    background: transparent !important; /* Make sure the items are transparent */
+    color: #d2b6a2; /* Set the text color to match the design */
+    padding: 0 20px; /* Adjust padding */
     height: auto;
     line-height: normal;
+    border: none !important; /* Remove borders */
 }
 
+/* Hover effect for menu items */
 .custom-menu .ant-menu-item:hover {
-    background: rgb(109, 107, 107) !important; /* subtle hover effect */
+    background: transparent !important; /* Keep background transparent */
+    color: #fff; /* Change text color on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    border-bottom: 2px solid #d2b6a2; /* Clear, visible line on hover */
 }
 
+/* Selected item (active menu item) */
 .custom-menu .ant-menu-item-selected {
-    background: transparent !important;
-    border-bottom: 2px solid white; /* optional underline for active tab */
+    background: transparent !important; /* Keep it transparent */
+    color: #fff; /* Text color for selected item */
+    border-bottom: 2px solid #d2b6a2;
 }
+
+/* Remove background from submenus */
+.custom-menu .ant-menu-submenu > .ant-menu-submenu-title {
+    background: transparent !important; /* Ensure submenus have no background */
+    border: none !important; /* Remove border from submenu */
+}
+
+/* Additional styles to remove dropdown arrows */
+.custom-menu .ant-menu-submenu-arrow {
+    display: none !important; /* Hide arrows for dropdowns */
+}
+
+/* Customize the menu container itself (optional) */
+.custom-menu .ant-menu-root {
+    background: transparent !important; /* Remove background */
+    border: none !important; /* Remove border */
+    box-shadow: none !important; /* Remove box-shadow */
+}
+
+/* Customizing the color of the active dot */
+.ant-carousel .slick-dots li.slick-active button {
+    background-color: #000000 !important; /* Change to your desired color */
+}
+
+/* Customizing the color of the inactive dots */
+.ant-carousel .slick-dots li button {
+    background-color: rgb(58, 57, 57) !important; /* Change to a lighter or different color */
+}
+
 
 .names {
     font-size: 35px;
-    color: white;
+    color: #d2b6a2;
     text-transform: none;
     font-family: "Playwrite RO", cursive;
     font-optical-sizing: auto;

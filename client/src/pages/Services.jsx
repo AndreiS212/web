@@ -1,26 +1,11 @@
-import React, {useState} from 'react';
-import {Layout, Card, Rate, Button, Input, Typography, Avatar, Space, Menu, Carousel} from 'antd';
-import {Link} from 'react-router-dom';  // Import from react-router-dom for routing
-import './Homepage.css';  // You can reuse the Homepage CSS for the same styling
+import React from 'react';
+import {Breadcrumb, Layout, Menu, theme, Flex, Splitter, Typography, Carousel, Card} from 'antd';
+import './Homepage.css';
+import { Link } from 'react-router-dom';  // Import from react-router-dom
 
-const {Content, Footer, Header} = Layout;
+const { Header, Content, Footer } = Layout;
 
-const reviews = [
-    {
-        name: "Ana & Mihai",
-        content: "Filmul nostru de nuntă este absolut superb! Am plâns de emoție când l-am văzut. Mulțumim din suflet!",
-    },
-    {
-        name: "Ioana & Radu",
-        content: "Profesionalism și pasiune! Ați surprins perfect fiecare moment important. Ne-ați oferit o amintire de neprețuit.",
-    },
-    {
-        name: "Andreea & Paul",
-        content: "Cinematografia este de top. Suntem foarte recunoscători pentru munca voastră minunată!",
-    },
-];
-
-const ReviewsPage = () => {
+const Services = () => {
     const items = [
         ...['Acasa', 'Povestea noastra', 'Galerie', 'Testimoniale', 'Servicii', 'Contact', 'Login'].map(key => ({
             key,
@@ -83,34 +68,7 @@ const ReviewsPage = () => {
 
             </Header>
             <Content>
-                <div style={{maxWidth: '700px', margin: '0 auto', padding: '60px 20px', marginTop: '100px'}}>
-                    <h2 style={{textAlign: 'center', marginBottom: 40, color: '#d2b6a2'}}>Ce spun cuplurile fericite
-                        💬</h2>
-                    <Carousel autoplay dotPosition="bottom">
-                        {reviews.map((review, index) => (
-                            <div key={index}>
-                                <Card
-                                    style={{
-                                        margin: '0 auto',
-                                        textAlign: 'center',
-                                        padding: '40px 30px',
-                                        borderRadius: 20,
-                                        border: '1px solid #d2b6a2',
-                                        backgroundColor: 'black',
-                                        boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                                    }}
-                                >
-                                    <p style={{
-                                        fontStyle: 'italic',
-                                        fontSize: '1.1rem',
-                                        marginBottom: 20
-                                    }}>"{review.content}"</p>
-                                    <strong style={{color: '#a78b71'}}>– {review.name}</strong>
-                                </Card>
-                            </div>
-                        ))}
-                    </Carousel>
-                </div>
+
             </Content>
             <Footer style={{
                 textAlign: 'center',
@@ -155,4 +113,4 @@ const ReviewsPage = () => {
     );
 };
 
-export default ReviewsPage;
+export default Services;

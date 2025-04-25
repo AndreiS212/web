@@ -1,78 +1,28 @@
 import React, {useState} from 'react';
-import {Layout, Menu, theme, Splitter, Carousel, Row, Col} from 'antd';
-import './Homepage.css';
+import {Layout, Menu, theme, Splitter, Carousel} from 'antd';
+import '../pages/Homepage.css';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import VideoThumbnailPlayer from "../components/VideoThumbnailPlayer";
+import EditButton from "../components/EditButton"
 
 const { Header, Content, Footer } = Layout;
-const styles = {
-    heroContainer: {
-        width: '100%',
-        height: '100vh',
-        overflow: 'hidden',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        color: '#d2b6a2',
-        textAlign: 'center',
-        backgroundColor: 'transparent',
-        zIndex: 3,
-        position: 'relative',
-    },
-    heroContent: {
-        zIndex: 3,
-        fontFamily: 'Playwrite RO, cursive',
-        position: 'absolute',
-        display: 'flex',
-        marginTop: '150px',
-        marginLeft: '410px',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#d2b6a2',
-        padding: '20px',
-        textShadow: '0 4px 6px rgba(0, 0, 0, 0.5)',
-        animation: 'fadeIn 2s ease-out',
-    },
-    heading: {
-        fontSize: '3rem',
-        fontWeight: 'none',
-        marginBottom: '15px',
-    },
-    subheading: {
-        fontSize: '1.2rem',
-        marginBottom: '20px',
-    },
-    // ctaButton: {
-    //     padding: '10px 20px',
-    //     backgroundColor: '#ff6600',
-    //     color: '#fff',
-    //     fontSize: '1rem',
-    //     border: 'none',
-    //     borderRadius: '5px',
-    //     cursor: 'pointer',
-    //     transition: 'all 0.3s ease',
-    // },
-}
 
-const Homepage = () => {
+const AdminDashboard = () => {
     const {
         token: { borderRadiusLG },
     } = theme.useToken();
 
     const items = [
-        ...['Acasa', 'Povestea noastra', 'Galerie', 'Testimoniale', 'Servicii', 'Contact', 'Login'].map(key => ({
+        ...['Despre noi', 'Testimoniale', 'Contact', 'Login'].map(key => ({
             key,
             label: (
                 <Link to={
-                    key === 'Galerie' ? '/gallery' :
-                        key === 'Testimoniale' ? '/reviews' :
-                            key === 'Contact' ? '/contact' :
-                                key === 'Povestea noastra' ? '/about' :
-                                    key === 'Servicii' ? '/services' :
-                                        key === 'Login' ? '/admin' :
-                                            '/'
+                    key === 'Testimoniale' ? '/reviews' :
+                        key === 'Contact' ? '/contact' :
+                            key === 'Despre noi' ? '/about' :
+                                key === 'Login' ? '/admin' :
+                                    '/'
                 }>
                     {key}
                 </Link>
@@ -80,11 +30,6 @@ const Homepage = () => {
         }))
     ];
 
-    const carouselItems = [
-        ['/image1.jpg', '/image2.jpg', '/image3.jpg'],
-        ['/image1.jpg', '/image2.jpg', '/image3.jpg'],
-        ['/image1.jpg', '/image2.jpg', '/image3.jpg'],
-    ];
 
     return (
         <Layout style={{ minHeight: '100vh', background: 'black' }}>
@@ -110,12 +55,11 @@ const Homepage = () => {
                         justifyContent: 'center',
                         borderBottom: 'none',
                         marginTop: '20px',
-                        zIndex: 10,
-                        position: 'relative',
+                        zIndex: 10 ,
+                        position: 'relative'
                     }}
                     className="custom-menu"
                 />
-
             </Header>
             {/*<VideoThumbnailPlayer*/}
             {/*    style={{width: "1400px", height: "600px", position: "center"}}*/}
@@ -127,81 +71,27 @@ const Homepage = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                style={{ position: 'relative' }}
             >
-                <div style={styles.heroContent}>
-                    <h1 style={styles.heading}>Imortalizează-ți ziua perfectă</h1>
-                    <p style={styles.subheading}>Filme de nuntă profesionale pentru a păstra fiecare clipă prețioasă</p>
-                    {/*<button style={styles.ctaButton}>Vezi Munca Noastră</button>*/}
+                <div style={{ position: 'relative', width: '100vw', height: '680px', marginTop: '110px' }}>
+                    <iframe
+                        src="https://player.vimeo.com/video/1045287269?controls=0&title=0&byline=0&portrait=0&autopause=0"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen"
+                        allowFullScreen
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            border: 'none',
+                            display: 'block',
+                            objectFit: 'cover',
+                            position: 'relative',
+                            zIndex: 1,
+                        }}
+                    ></iframe>
+                    <EditButton />
                 </div>
-                <iframe
-                    src="https://player.vimeo.com/video/1045287269?controls=0&title=0&byline=0&portrait=0&autopause=0"
-                    height="600"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen"
-                    allowFullScreen
-                    style={{
-                        width: '100vw',
-                        height: '670px',
-                        border: 'none',
-                        display: 'block',
-                        objectFit: 'cover',
-                        margin: '0',
-                        padding: '0',
-                        zIndex: 1,
-                        position: 'relative',
-                        marginTop: '110px',
-                        overlay: 'rgba(0, 0, 0, 0.4)',
-                    }}>
-                </iframe>
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',  // Black semi-transparent overlay
-                        zIndex: 2,  // Overlay on top of the iframe
-                    }}
-                ></div>
-                <svg
-                    viewBox="0 0 2000 100"
-                    preserveAspectRatio="xMidYMid meet"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{
-                        position: 'absolute',
-                        bottom: -30,
-                        left: 0,
-                        width: '100%',
-                        height: '80px',
-                        zIndex: 3,
-                    }}
-                >
-                    {/* Horizontal line */}
-                    <line x1="0" y1="50" x2="2000" y2="50" stroke="#d2b6a2" strokeWidth="1.5" />
-
-                    {/* Interlocking rings */}
-                    <circle cx="1015" cy="50" r="32" fill="none" stroke="#d2b6a2" strokeWidth="2.5" />
-                    <circle cx="1047" cy="50" r="32" fill="none" stroke="#d2b6a2" strokeWidth="2.5" style={{ mixBlendMode: 'multiply' }} />
-
-                    {/* Left floral swirl - enhanced */}
-                    <path d="M980 50 C960 10, 940 90, 920 50" fill="none" stroke="#d2b6a2" strokeWidth="1.6" />
-                    <circle cx="950" cy="50" r="3" fill="#d2b6a2" />
-                    <circle cx="945" cy="40" r="2.5" fill="#d2b6a2" />
-                    <circle cx="940" cy="60" r="2.2" fill="#d2b6a2" />
-                    <path d="M955 48 C953 43, 957 43, 955 48" fill="#d2b6a2" />
-                    <path d="M948 52 C946 47, 950 47, 948 52" fill="#d2b6a2" />
-
-                    {/* Right floral swirl - enhanced */}
-                    <path d="M1080 50 C1100 10, 1120 90, 1140 50" fill="none" stroke="#d2b6a2" strokeWidth="1.6" />
-                    <circle cx="1110" cy="50" r="3" fill="#d2b6a2" />
-                    <circle cx="1115" cy="40" r="2.5" fill="#d2b6a2" />
-                    <circle cx="1120" cy="60" r="2.2" fill="#d2b6a2" />
-                    <path d="M1105 48 C1103 43, 1107 43, 1105 48" fill="#d2b6a2" />
-                    <path d="M1112 52 C1110 47, 1114 47, 1112 52" fill="#d2b6a2" />
-                </svg>
             </motion.div>
+
             <Content style={{ padding: '0 48px', background: 'transparent', marginTop: '50px'}}>
                 <div
                     style={{
@@ -212,27 +102,10 @@ const Homepage = () => {
                         color: 'white',
                     }}
                 >
-                    <Carousel autoplay
-                              speed={3000}  // Transition speed in milliseconds (1 second)
-                              effect="scrollx"  // Smooth horizontal transition
-                              dots={true}  // Enable dots for navigation
-                              easing="ease-in-out"  // Smooth transition easing
-                    >
-                        {carouselItems.map((images, index) => (
-                            <div key={index}>
-                                <Row gutter={[16, 16]} justify="center">
-                                    {images.map((img, imgIndex) => (
-                                        <Col span={8} key={imgIndex}>
-                                            <img src={img} alt={`carousel-item-${imgIndex}`} style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
-                                        </Col>
-                                    ))}
-                                </Row>
-                            </div>
-                        ))}
-                    </Carousel>
                     <Splitter className="custom-splitter" style={{height: 500, background: 'transparent'}}>
                         <Splitter.Panel defaultSize="60%" min="20%" max="70%" style={{ paddingRight: '20px' }}>
                             <VideoThumbnailPlayer videoId="1048483085" />
+                            {/*<EditButton/>*/}
                         </Splitter.Panel>
                         <Splitter.Panel defaultSize="40%" min="20%" max="70%" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'Segoe UI', textTransform: "uppercase"}}>
@@ -247,8 +120,10 @@ const Homepage = () => {
                                 <p>Lens: Panasonic LUMIX S 35mm f/1.8</p>
                                 <p>Color grading: Rec 709 and my custom luts</p>
                             </div>
+                            {/*<EditButton/>*/}
                         </Splitter.Panel>
                     </Splitter>
+
                     <Splitter className="custom-splitter" style={{height: 500}}>
                         <Splitter.Panel defaultSize="40%" min="20%" max="70%" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'Segoe UI', textTransform: "uppercase"}}>
@@ -263,14 +138,17 @@ const Homepage = () => {
                                 <p>Lens: Panasonic LUMIX S 35mm f/1.8</p>
                                 <p>Color grading: Rec 709 and my custom luts</p>
                             </div>
+                            {/*<EditButton/>*/}
                         </Splitter.Panel>
                         <Splitter.Panel defaultSize="60%" min="20%" max="70%" style={{ paddingLeft: '20px' }}>
                             <VideoThumbnailPlayer videoId="1045287269"/>
+                            {/*<EditButton/>*/}
                         </Splitter.Panel>
                     </Splitter>
                     <Splitter className="custom-splitter" style={{height: 500}}>
                         <Splitter.Panel defaultSize="60%" min="20%" max="70%" style={{ paddingRight: '20px' }}>
                             <VideoThumbnailPlayer videoId="1045290053"/>
+                            {/*<EditButton/>*/}
                         </Splitter.Panel>
                         <Splitter.Panel defaultSize="40%" min="20%" max="70%" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'Segoe UI', textTransform: "uppercase"}}>
@@ -285,6 +163,7 @@ const Homepage = () => {
                                 <p>Lens: Panasonic LUMIX S 35mm f/1.8</p>
                                 <p>Color grading: Rec 709 and my custom luts</p>
                             </div>
+                            {/*<EditButton/>*/}
                         </Splitter.Panel>
                     </Splitter>
                 </div>
@@ -331,4 +210,4 @@ const Homepage = () => {
     );
 };
 
-export default Homepage;
+export default AdminDashboard;
