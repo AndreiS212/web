@@ -8,6 +8,10 @@
 # testing
 /coverage
 
+# backend
+/backend/.idea
+/backend/.gradle
+
 # production
 /build
 
