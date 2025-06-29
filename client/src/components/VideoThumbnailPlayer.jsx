@@ -51,25 +51,6 @@ const VideoThumbnailPlayer = ({ videoId, style, overlayText }) => {
                 style={thumbnailStyle}
                 onClick={handlePlay}
             >
-              {/*<div*/}
-              {/*    style={{*/}
-              {/*      alignItems: 'center',*/}
-              {/*      justifyContent: 'center',*/}
-              {/*      marginLeft: '50px',*/}
-              {/*      marginTop: '90px',*/}
-              {/*      top: '20px',*/}
-              {/*      left: '50%',*/}
-              {/*      transform: 'translateX(-50%)',*/}
-              {/*      color: '#fff',*/}
-              {/*      fontFamily: '"Playwrite RO", cursive',*/}
-              {/*      fontSize: '32px',*/}
-              {/*      fontWeight: 'bold',*/}
-              {/*      textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',*/}
-              {/*      zIndex: 2,*/}
-              {/*    }}*/}
-              {/*>*/}
-              {/*  {overlayText}*/}
-              {/*</div>*/}
               <button
                   style={{
                     background: 'transparent',

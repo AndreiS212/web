@@ -64,16 +64,19 @@
     box-shadow: none !important; /* Remove box-shadow */
 }
 
+.custom-carousel .slick-dots {
+    bottom: -40px !important; /* Moves dots below the carousel */
+}
+
 /* Customizing the color of the active dot */
 .ant-carousel .slick-dots li.slick-active button {
-    background-color: #000000 !important; /* Change to your desired color */
+    background-color: #6d6b6b !important; /* Change to your desired color */
 }
 
 /* Customizing the color of the inactive dots */
 .ant-carousel .slick-dots li button {
-    background-color: rgb(58, 57, 57) !important; /* Change to a lighter or different color */
+    background-color: rgb(255, 255, 255) !important; /* Change to a lighter or different color */
 }
-
 
 .names {
     font-size: 35px;

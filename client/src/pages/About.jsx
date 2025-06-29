@@ -1,114 +1,108 @@
 import React from 'react';
-import {Breadcrumb, Layout, Menu, theme, Flex, Splitter, Typography, Carousel, Card} from 'antd';
-import './Homepage.css';
-import { Link } from 'react-router-dom';  // Import from react-router-dom
+import { Layout } from 'antd';
+import CustomHeader from '../components/CustomHeader';
+import CustomFooter from '../components/CustomFooter';
+import { motion } from 'framer-motion';
 
-const { Header, Content, Footer } = Layout;
+const { Content } = Layout;
 
 const About = () => {
-    const items = [
-        ...['Acasa', 'Povestea noastra', 'Galerie', 'Testimoniale', 'Servicii', 'Contact', 'Login'].map(key => ({
-            key,
-            label: (
-                <Link to={
-                    key === 'Galerie' ? '/gallery' :
-                        key === 'Testimoniale' ? '/reviews' :
-                            key === 'Contact' ? '/contact' :
-                                key === 'Povestea noastra' ? '/about' :
-                                    key === 'Servicii' ? '/services' :
-                                        key === 'Login' ? '/admin' :
-                                            '/'
-                }>
-                    {key}
-                </Link>
-            ),
-        }))
-    ];
     return (
-        <Layout style={{minHeight: '100vh', background: 'black'}}>
-            <Header style={{
-                display: 'flex',
-                alignItems: 'center',
-                background: 'transparent',
-                justifyContent: 'center',
-                flexDirection: 'column'
-            }}>
-                <div style={{display: 'flex', justifyContent: 'center', marginTop: '100px', height: '100px'}}>
-                    <Link to="/">
-                        <img
-                            src="/image0.png"
-                            alt="Logo"
-                            style={{
-                                width: '500px',
-                                height: '100px',
-                                cursor: 'pointer',
-                                zIndex: 10,
-                                position: 'relative'
-                            }}
-                        />
-                    </Link>
-                </div>
-
-                <Menu
-                    theme="dark"
-                    mode="horizontal"
-                    defaultSelectedKeys={['2']}
-                    items={items}
+        <Layout style={{ minHeight: '100vh', background: '#121212', color: '#f5f0e6' }}>
+            <CustomHeader />
+            <Content style={{ padding: '50px 20px', display: 'flex', justifyContent: 'center' }}>
+                <section
                     style={{
-                        background: 'transparent',
+                        maxWidth: 1100,
                         display: 'flex',
-                        justifyContent: 'center',
-                        borderBottom: 'none',
-                        marginTop: '20px',
-                        zIndex: 10,
-                        position: 'relative',
+                        flexWrap: 'wrap',
+                        gap: '40px',
+                        fontFamily: 'Playwrite RO, cursive, Roboto Mono',
+                        lineHeight: 1.6,
+                        color: '#dcd7cc',
                     }}
-                    className="custom-menu"
-                />
+                >
+                    {/* Image container */}
+                    <div
+                        style={{
+                            flex: '1 1 400px',
+                            minWidth: 400,
+                            borderRadius: 20,
+                            overflow: 'hidden',
+                            boxShadow: '0 12px 24px rgba(0,0,0,0.7)',
+                        }}
+                    >
+                        <img
+                            src='/image11_p.jpg'
+                            alt="Profil"
+                            style={{ width: '100%', height: '100%', display: 'block' }}
+                            loading="lazy"
+                        />
+                    </div>
 
-            </Header>
-            <Content>
+                    {/* Text container */}
+                    <div style={{ flex: '2 1 400px', minWidth: 280 }}>
+                        <h1
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 12,
+                                fontWeight: 'normal',
+                                fontSize: '3rem',
+                                color: '#e3c9b6',
+                                marginBottom: '1rem',
+                            }}
+                        >
+                            Despre mine
+                        </h1>
 
+                        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', fontFamily: 'Segoe UI' }}>
+                            Sunt <strong>Luca</strong>, videograf specializat în surprinderea celor mai frumoase
+                            momente din viața voastră. Povestea voastră de dragoste merită să fie redată cu emoție,
+                            naturalețe și rafinament.
+                        </p>
+
+                        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', fontFamily: 'Segoe UI'}}>
+                            De peste <strong>[X]</strong> ani, am onoarea să fiu alături de cupluri în cea mai importantă
+                            zi a lor, transformând clipele efemere în amintiri de neuitat. Stilul meu se bazează pe
+                            atenția la detalii, lumina naturală și spontaneitate, pentru ca fiecare film să fie unic,
+                            autentic și plin de viață.
+                        </p>
+
+                        <p style={{ fontSize: '1.1rem', marginBottom: '2.5rem', fontFamily: 'Segoe UI' }}>
+                            Pentru mine, fiecare nuntă este o nouă poveste ce așteaptă să fie spusă prin imagini pline
+                            de suflet și eleganță.
+                        </p>
+
+                        <p
+                            style={{
+                                fontSize: '1.3rem',
+                                fontWeight: 'bold',
+                                textAlign: 'center',
+                                color: '#e3c9b6',
+                            }}
+                        >
+                            Hai să creăm împreună amintiri ce vor dăinui o viață întreagă.
+                        </p>
+                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                            <button style={{
+                                padding: '10px 20px',
+                                backgroundColor: '#d2b6a2',
+                                color: '#000000',
+                                fontSize: '1rem',
+                                border: 'none',
+                                borderRadius: '5px',
+                                cursor: 'pointer',
+                                transition: 'all 0.3s ease',
+                                fontFamily: 'Roboto Mono',
+                            }}>
+                                Contact
+                            </button>
+                        </div>
+                    </div>
+                </section>
             </Content>
-            <Footer style={{
-                textAlign: 'center',
-                background: 'linear-gradient(to right, #2f2f2f, #000)',
-                padding: '40px 0',
-                color: '#fff',
-                borderTop: '1px solid #d2b6a2',
-                fontFamily: 'Segoe UI',
-                fontSize: '14px',
-            }}>
-                <div>
-                    <p style={{fontSize: '16px', marginBottom: '20px'}}>
-                        <strong>AnDi Design</strong> ©{new Date().getFullYear()} - Created by Andrei Sigartau
-                    </p>
-                    <div style={{marginBottom: '20px'}}>
-                        <Link to="/privacy-policy" style={{color: '#d2b6a2', marginRight: '15px'}}>
-                            Privacy Policy
-                        </Link>
-                        <Link to="/terms" style={{color: '#d2b6a2', marginRight: '15px'}}>
-                            Terms of Service
-                        </Link>
-                        <Link to="/contact" style={{color: '#d2b6a2'}}>
-                            Contact
-                        </Link>
-                    </div>
-                    <div style={{marginTop: '20px'}}>
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-facebook"
-                               style={{color: '#d2b6a2', marginRight: '20px', fontSize: '18px'}}/>
-                        </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-instagram"
-                               style={{color: '#d2b6a2', marginRight: '20px', fontSize: '18px'}}/>
-                        </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-twitter" style={{color: '#d2b6a2', fontSize: '18px'}}/>
-                        </a>
-                    </div>
-                </div>
-            </Footer>
+            <CustomFooter />
         </Layout>
     );
 };

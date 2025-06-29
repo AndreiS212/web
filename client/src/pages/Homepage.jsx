@@ -1,127 +1,78 @@
-import React, {useState} from 'react';
-import {Layout, Menu, theme, Splitter, Carousel, Row, Col} from 'antd';
+import React from 'react';
+import {Layout, Menu, theme, Carousel, Row, Col, Grid} from 'antd';
 import './Homepage.css';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import VideoThumbnailPlayer from "../components/VideoThumbnailPlayer";
+import Reviews from "../components/Reviews";
+import CustomHeader from "../components/CustomHeader";
+import CustomFooter from "../components/CustomFooter";
+import ServicesGallery from "../components/ServicesGallery";
 
-const { Header, Content, Footer } = Layout;
-const styles = {
-    heroContainer: {
-        width: '100%',
-        height: '100vh',
-        overflow: 'hidden',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        color: '#d2b6a2',
-        textAlign: 'center',
-        backgroundColor: 'transparent',
-        zIndex: 3,
-        position: 'relative',
-    },
-    heroContent: {
-        zIndex: 3,
-        fontFamily: 'Playwrite RO, cursive',
-        position: 'absolute',
-        display: 'flex',
-        marginTop: '150px',
-        marginLeft: '410px',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#d2b6a2',
-        padding: '20px',
-        textShadow: '0 4px 6px rgba(0, 0, 0, 0.5)',
-        animation: 'fadeIn 2s ease-out',
-    },
-    heading: {
-        fontSize: '3rem',
-        fontWeight: 'none',
-        marginBottom: '15px',
-    },
-    subheading: {
-        fontSize: '1.2rem',
-        marginBottom: '20px',
-    },
-    // ctaButton: {
-    //     padding: '10px 20px',
-    //     backgroundColor: '#ff6600',
-    //     color: '#fff',
-    //     fontSize: '1rem',
-    //     border: 'none',
-    //     borderRadius: '5px',
-    //     cursor: 'pointer',
-    //     transition: 'all 0.3s ease',
-    // },
-}
-
+const { Content} = Layout;
 const Homepage = () => {
     const {
         token: { borderRadiusLG },
     } = theme.useToken();
 
-    const items = [
-        ...['Acasa', 'Povestea noastra', 'Galerie', 'Testimoniale', 'Servicii', 'Contact', 'Login'].map(key => ({
-            key,
-            label: (
-                <Link to={
-                    key === 'Galerie' ? '/gallery' :
-                        key === 'Testimoniale' ? '/reviews' :
-                            key === 'Contact' ? '/contact' :
-                                key === 'Povestea noastra' ? '/about' :
-                                    key === 'Servicii' ? '/services' :
-                                        key === 'Login' ? '/admin' :
-                                            '/'
-                }>
-                    {key}
-                </Link>
-            ),
-        }))
-    ];
+    const styles = {
+        heroContainer: {
+            width: '100%',
+            height: '100vh',
+            overflow: 'hidden',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            color: '#d2b6a2',
+            textAlign: 'center',
+            backgroundColor: 'transparent',
+            zIndex: 3,
+            position: 'relative',
+        },
+        heroContent: {
+            zIndex: 3,
+            // position: 'absolute',
+            display: 'flex',
+            // marginTop: '70px',
+            // marginLeft: '350px',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#d2b6a2',
+            padding: '20px',
+            // maxWidth: '700px',
+            textShadow: '0 4px 6px rgba(0, 0, 0, 0.5)',
+            animation: 'fadeIn 2s ease-out',
+        },
+        heading: {
+            fontSize: '2rem',
+            fontWeight: 'none',
+            marginBottom: '15px',
+            fontFamily: 'Playwrite RO, cursive',
+        },
+        subheading: {
+            fontSize: '1.2rem',
+            marginBottom: '20px',
+            fontFamily: 'Segoe UI',
+            textAlign: 'center'
+        },
+        ctaButton: {
+            padding: '10px 20px',
+            backgroundColor: '#d2b6a2',
+            color: '#000000',
+            fontSize: '1rem',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            fontFamily: 'Roboto Mono',
+            alignItems: 'center'
+        },
+    }
 
-    const carouselItems = [
-        ['/image1.jpg', '/image2.jpg', '/image3.jpg'],
-        ['/image1.jpg', '/image2.jpg', '/image3.jpg'],
-        ['/image1.jpg', '/image2.jpg', '/image3.jpg'],
-    ];
+    const carouselItems = ['/image6_l.jpg', '/image2_l.jpg', '/image10_l.jpg'];
 
     return (
         <Layout style={{ minHeight: '100vh', background: 'black' }}>
-            <Header style={{ display: 'flex', alignItems: 'center', background: 'transparent', justifyContent: 'center', flexDirection: 'column'}}>
-                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '100px', height: '100px' }}>
-                    <Link to="/">
-                        <img
-                            src="/image0.png"
-                            alt="Logo"
-                            style={{ width: '500px', height: '100px', cursor: 'pointer', zIndex: 10 , position: 'relative' }}
-                        />
-                    </Link>
-                </div>
-
-                <Menu
-                    theme="dark"
-                    mode="horizontal"
-                    defaultSelectedKeys={['2']}
-                    items={items}
-                    style={{
-                        background: 'transparent',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        borderBottom: 'none',
-                        marginTop: '20px',
-                        zIndex: 10,
-                        position: 'relative',
-                    }}
-                    className="custom-menu"
-                />
-
-            </Header>
-            {/*<VideoThumbnailPlayer*/}
-            {/*    style={{width: "1400px", height: "600px", position: "center"}}*/}
-            {/*    videoId="1045287269"*/}
-            {/*    // overlayText={"Claudia & Dragos"}*/}
-            {/*/>*/}
+            <CustomHeader/>
 
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -129,11 +80,6 @@ const Homepage = () => {
                 transition={{ duration: 0.8 }}
                 style={{ position: 'relative' }}
             >
-                <div style={styles.heroContent}>
-                    <h1 style={styles.heading}>Imortalizează-ți ziua perfectă</h1>
-                    <p style={styles.subheading}>Filme de nuntă profesionale pentru a păstra fiecare clipă prețioasă</p>
-                    {/*<button style={styles.ctaButton}>Vezi Munca Noastră</button>*/}
-                </div>
                 <iframe
                     src="https://player.vimeo.com/video/1045287269?controls=0&title=0&byline=0&portrait=0&autopause=0"
                     height="600"
@@ -150,21 +96,10 @@ const Homepage = () => {
                         padding: '0',
                         zIndex: 1,
                         position: 'relative',
-                        marginTop: '110px',
-                        overlay: 'rgba(0, 0, 0, 0.4)',
+                        marginTop: '-140px',
+                        // overlay: 'rgba(0, 0, 0, 0.3)',
                     }}>
                 </iframe>
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',  // Black semi-transparent overlay
-                        zIndex: 2,  // Overlay on top of the iframe
-                    }}
-                ></div>
                 <svg
                     viewBox="0 0 2000 100"
                     preserveAspectRatio="xMidYMid meet"
@@ -202,131 +137,134 @@ const Homepage = () => {
                     <path d="M1112 52 C1110 47, 1114 47, 1112 52" fill="#d2b6a2" />
                 </svg>
             </motion.div>
-            <Content style={{ padding: '0 48px', background: 'transparent', marginTop: '50px'}}>
+            <Content style={{ padding: '0 48px', background: 'transparent', marginTop: '50px' }}>
+                <div style={styles.heroContent}>
+                    <h1 style={styles.heading}>Povestea voastra prin obiectivul meu</h1>
+                    <p style={styles.subheading}>O fotografie nu este doar o imagine, ci o emoție oprită în timp.
+                        Ne dorim să simțiți iar și iar acea bucurie, emoție și căldură de la nunta voastră,
+                        prin fiecare fotografie și film realizat cu pasiune și atenție la detalii.</p>
+                </div>
+
                 <div
                     style={{
                         background: 'transparent',
                         minHeight: 280,
-                        padding: 24,
+                        padding: 15,
                         borderRadius: borderRadiusLG,
                         color: 'white',
+                        marginTop: '100px'
                     }}
                 >
-                    <Carousel autoplay
-                              speed={3000}  // Transition speed in milliseconds (1 second)
-                              effect="scrollx"  // Smooth horizontal transition
-                              dots={true}  // Enable dots for navigation
-                              easing="ease-in-out"  // Smooth transition easing
+                    <Carousel
+                        className="custom-carousel"
+                        autoplay
+                        speed={3000}
+                        effect="fade"
+                        dots={true}
+                        easing="ease-in-out"
                     >
-                        {carouselItems.map((images, index) => (
+                        {carouselItems.map((img, index) => (
                             <div key={index}>
-                                <Row gutter={[16, 16]} justify="center">
-                                    {images.map((img, imgIndex) => (
-                                        <Col span={8} key={imgIndex}>
-                                            <img src={img} alt={`carousel-item-${imgIndex}`} style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
-                                        </Col>
-                                    ))}
-                                </Row>
+                                <img
+                                    src={img}
+                                    alt={`carousel-item-${index}`}
+                                    style={{
+                                        width: '100%',
+                                        height: 'auto',
+                                        borderRadius: '8px',
+                                        objectFit: 'cover',
+                                    }}
+                                />
                             </div>
                         ))}
                     </Carousel>
-                    <Splitter className="custom-splitter" style={{height: 500, background: 'transparent'}}>
-                        <Splitter.Panel defaultSize="60%" min="20%" max="70%" style={{ paddingRight: '20px' }}>
-                            <VideoThumbnailPlayer videoId="1048483085" />
-                        </Splitter.Panel>
-                        <Splitter.Panel defaultSize="40%" min="20%" max="70%" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'Segoe UI', textTransform: "uppercase"}}>
-                                <p className="names">
-                                    Claudia & Dragos
-                                </p>
-                                <svg width="100" height="20" viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg" fill="none" style={{ margin: '16px auto' }}>
-                                    <path d="M0 10 Q25 0, 50 10 T100 10" stroke="#d2b6a2" strokeWidth="2" fill="none" />
-                                </svg>
-                                <p style={{ fontSize: '20px'}}>- Wedd Short Movie -</p>
-                                <p>Shoot with Panasonic Lumix S5 IIX</p>
-                                <p>Lens: Panasonic LUMIX S 35mm f/1.8</p>
-                                <p>Color grading: Rec 709 and my custom luts</p>
-                            </div>
-                        </Splitter.Panel>
-                    </Splitter>
-                    <Splitter className="custom-splitter" style={{height: 500}}>
-                        <Splitter.Panel defaultSize="40%" min="20%" max="70%" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'Segoe UI', textTransform: "uppercase"}}>
-                                <p className="names">
-                                    Roxana & Dragos
-                                </p>
-                                <svg width="100" height="20" viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg" fill="none" style={{ margin: '16px auto' }}>
-                                    <path d="M0 10 Q25 0, 50 10 T100 10" stroke="#d2b6a2" strokeWidth="2" fill="none" />
-                                </svg>
-                                <p style={{ fontSize: '20px'}}>- Wedd Short Movie -</p>
-                                <p>Shoot with Panasonic Lumix S5 IIX</p>
-                                <p>Lens: Panasonic LUMIX S 35mm f/1.8</p>
-                                <p>Color grading: Rec 709 and my custom luts</p>
-                            </div>
-                        </Splitter.Panel>
-                        <Splitter.Panel defaultSize="60%" min="20%" max="70%" style={{ paddingLeft: '20px' }}>
-                            <VideoThumbnailPlayer videoId="1045287269"/>
-                        </Splitter.Panel>
-                    </Splitter>
-                    <Splitter className="custom-splitter" style={{height: 500}}>
-                        <Splitter.Panel defaultSize="60%" min="20%" max="70%" style={{ paddingRight: '20px' }}>
-                            <VideoThumbnailPlayer videoId="1045290053"/>
-                        </Splitter.Panel>
-                        <Splitter.Panel defaultSize="40%" min="20%" max="70%" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'Segoe UI', textTransform: "uppercase"}}>
-                                <p className="names">
-                                    Gabriela & Andrei
-                                </p>
-                                <svg width="100" height="20" viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg" fill="none" style={{ margin: '16px auto' }}>
-                                    <path d="M0 10 Q25 0, 50 10 T100 10" stroke="#d2b6a2" strokeWidth="2" fill="none" />
-                                </svg>
-                                <p style={{ fontSize: '20px'}}>- Wedd Short Movie -</p>
-                                <p>Shoot with Panasonic Lumix S5 IIX</p>
-                                <p>Lens: Panasonic LUMIX S 35mm f/1.8</p>
-                                <p>Color grading: Rec 709 and my custom luts</p>
-                            </div>
-                        </Splitter.Panel>
-                    </Splitter>
+                </div>
+
+                <div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center', // aligns both top
+                    gap: '40px',
+                    marginTop: '50px',
+                }}>
+
+                    {/* Image Overlap Block */}
+                    <div style={{ position: 'relative', width: 'fit-content' }}>
+                        <img
+                            src="/image4_p.jpg"
+                            alt="Main"
+                            style={{
+                                display: 'block',
+                                width: '300px',
+                                height: 'auto',
+                            }}
+                        />
+                        <img
+                            src="/image7_p.jpg"
+                            alt="Overlay"
+                            style={{
+                                position: 'absolute',
+                                bottom: '-100px',
+                                right: '-200px',
+                                width: '250px',
+                                height: 'auto',
+                            }}
+                        />
+                    </div>
+
+                    {/* Text and CTA Block */}
+                    <div style={{ maxWidth: '800px', width:'100%' }}>
+                        <h1 style={{
+                            fontFamily: 'Playwrite RO, cursive',
+                            color: '#d2b6a2',
+                            textAlign: 'center',
+                            marginBottom: '20px'
+                        }}>
+                            Magia Momentelor Unice
+                        </h1>
+                        <p style={{
+                            ...styles.subheading,
+                            textAlign: 'center',
+                            marginBottom: '20px'
+                        }}>
+                            Fiecare zâmbet, fiecare lacrimă de fericire,
+                            fiecare privire plină de emoție merită să fie păstrată pentru totdeauna.
+                            Cu atenție și dragoste, capturăm acele clipe unice din ziua voastră specială,
+                            pentru ca peste ani să vă puteți întoarce în timp și să retrăiți fiecare sentiment.
+                            Fiecare zâmbet, fiecare lacrimă de fericire,
+                            fiecare privire plină de emoție merită să fie păstrată pentru totdeauna.
+                            Cu atenție și dragoste, capturăm acele clipe unice din ziua voastră specială,
+                            pentru ca peste ani să vă puteți întoarce în timp și să retrăiți fiecare sentiment.
+                            Fiecare zâmbet, fiecare lacrimă de fericire,
+                            fiecare privire plină de emoție merită să fie păstrată pentru totdeauna.
+                            Cu atenție și dragoste, capturăm acele clipe unice din ziua voastră specială,
+                            pentru ca peste ani să vă puteți întoarce în timp și să retrăiți fiecare sentiment.
+                        </p>
+                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                            <button style={styles.ctaButton}>
+                                Mai multe povesti
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <motion.div initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}>
+                    <ServicesGallery/>
+                </motion.div>
+
+                <div style={{ marginTop: '80px' }}>
+                    <Reviews />
                 </div>
             </Content>
 
-            <Footer style={{
-                textAlign: 'center',
-                background: 'linear-gradient(to right, #2f2f2f, #000)',
-                padding: '40px 0',
-                color: '#fff',
-                borderTop: '1px solid #d2b6a2',
-                fontFamily: 'Segoe UI',
-                fontSize: '14px',
-            }}>
-                <div>
-                    <p style={{ fontSize: '16px', marginBottom: '20px' }}>
-                        <strong>AnDi Design</strong> ©{new Date().getFullYear()} - Created by Andrei Sigartau
-                    </p>
-                    <div style={{ marginBottom: '20px' }}>
-                        <Link to="/privacy-policy" style={{ color: '#d2b6a2', marginRight: '15px' }}>
-                            Privacy Policy
-                        </Link>
-                        <Link to="/terms" style={{ color: '#d2b6a2', marginRight: '15px' }}>
-                            Terms of Service
-                        </Link>
-                        <Link to="/contact" style={{ color: '#d2b6a2' }}>
-                            Contact
-                        </Link>
-                    </div>
-                    <div style={{ marginTop: '20px' }}>
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-facebook" style={{ color: '#d2b6a2', marginRight: '20px', fontSize: '18px' }} />
-                        </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-instagram" style={{ color: '#d2b6a2', marginRight: '20px', fontSize: '18px' }} />
-                        </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-twitter" style={{ color: '#d2b6a2', fontSize: '18px' }} />
-                        </a>
-                    </div>
-                </div>
-            </Footer>
+            <CustomFooter/>
         </Layout>
     );
 };
