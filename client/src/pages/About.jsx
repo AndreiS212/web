@@ -3,6 +3,7 @@ import { Layout } from 'antd';
 import CustomHeader from '../components/CustomHeader';
 import CustomFooter from '../components/CustomFooter';
 import { motion } from 'framer-motion';
+import DecoratedTitle from "../components/DecoratedTitle";
 
 const { Content } = Layout;
 
@@ -10,6 +11,26 @@ const About = () => {
     return (
         <Layout style={{ minHeight: '100vh', background: '#121212', color: '#f5f0e6' }}>
             <CustomHeader />
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                style={{ position: 'relative' }}
+            >
+                <img src='/nunta3-7.jpg' alt='header' style={{
+                    width: '99vw',
+                    height: '640px',
+                    border: 'none',
+                    display: 'block',
+                    objectFit: 'cover',
+                    margin: '0',
+                    padding: '0',
+                    zIndex: 1,
+                    position: 'relative',
+                    marginTop: '-160px',
+                }}/>
+            </motion.div>
+            <DecoratedTitle text="Despre Mine" align="left"/>
             <Content style={{ padding: '50px 20px', display: 'flex', justifyContent: 'center' }}>
                 <section
                     style={{
@@ -17,61 +38,29 @@ const About = () => {
                         display: 'flex',
                         flexWrap: 'wrap',
                         gap: '40px',
-                        fontFamily: 'Playwrite RO, cursive, Roboto Mono',
+                        fontFamily: 'Playfair Display SC, Roboto Mono',
                         lineHeight: 1.6,
                         color: '#dcd7cc',
                     }}
                 >
-                    {/* Image container */}
-                    <div
-                        style={{
-                            flex: '1 1 400px',
-                            minWidth: 400,
-                            borderRadius: 20,
-                            overflow: 'hidden',
-                            boxShadow: '0 12px 24px rgba(0,0,0,0.7)',
-                        }}
-                    >
-                        <img
-                            src='/image11_p.jpg'
-                            alt="Profil"
-                            style={{ width: '100%', height: '100%', display: 'block' }}
-                            loading="lazy"
-                        />
-                    </div>
-
                     {/* Text container */}
                     <div style={{ flex: '2 1 400px', minWidth: 280 }}>
-                        <h1
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: 12,
-                                fontWeight: 'normal',
-                                fontSize: '3rem',
-                                color: '#e3c9b6',
-                                marginBottom: '1rem',
-                            }}
-                        >
-                            Despre mine
-                        </h1>
 
                         <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', fontFamily: 'Segoe UI' }}>
-                            Sunt <strong>Luca</strong>, videograf specializat în surprinderea celor mai frumoase
-                            momente din viața voastră. Povestea voastră de dragoste merită să fie redată cu emoție,
-                            naturalețe și rafinament.
+                            Salut, sunt <strong>Luca</strong>, videograf si storyteller, specializat în surprinderea celor mai frumoase
+                            momente din viața voastră.
                         </p>
 
                         <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', fontFamily: 'Segoe UI'}}>
-                            De peste <strong>[X]</strong> ani, am onoarea să fiu alături de cupluri în cea mai importantă
-                            zi a lor, transformând clipele efemere în amintiri de neuitat. Stilul meu se bazează pe
-                            atenția la detalii, lumina naturală și spontaneitate, pentru ca fiecare film să fie unic,
-                            autentic și plin de viață.
+                            De peste <strong>7</strong> ani, văd oamenii “cu alt ochi”... unul care are mereu zoom-ul la el!📸
                         </p>
 
                         <p style={{ fontSize: '1.1rem', marginBottom: '2.5rem', fontFamily: 'Segoe UI' }}>
-                            Pentru mine, fiecare nuntă este o nouă poveste ce așteaptă să fie spusă prin imagini pline
-                            de suflet și eleganță.
+                            Cele mai frumoase povești sunt cele naturale, iar eu sunt doar un martor tăcut, cu camera în mână.
+                        </p>
+
+                        <p style={{ fontSize: '1.1rem', marginBottom: '2.5rem', fontFamily: 'Segoe UI' }}>
+                            Dacă mă vezi încruntat în timp ce filmez, nu înseamnă că vreau să te bat... Așa sunt eu :)).
                         </p>
 
                         <p
@@ -80,6 +69,7 @@ const About = () => {
                                 fontWeight: 'bold',
                                 textAlign: 'center',
                                 color: '#e3c9b6',
+                                textTransform: "none"
                             }}
                         >
                             Hai să creăm împreună amintiri ce vor dăinui o viață întreagă.
@@ -99,6 +89,24 @@ const About = () => {
                                 Contact
                             </button>
                         </div>
+                    </div>
+
+                    {/* Image container */}
+                    <div
+                        style={{
+                            flex: '1 1 400px',
+                            minWidth: 400,
+                            borderRadius: 20,
+                            overflow: 'hidden',
+                            boxShadow: '0 12px 24px rgba(0,0,0,0.7)',
+                        }}
+                    >
+                        <img
+                            src='/luca.jpeg'
+                            alt="Profil"
+                            style={{ width: '100%', height: '100%', display: 'block' }}
+                            loading="lazy"
+                        />
                     </div>
                 </section>
             </Content>

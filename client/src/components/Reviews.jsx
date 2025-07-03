@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import {Layout, Card, Rate, Button, Input, Typography, Avatar, Space, Menu, Carousel} from 'antd';
-import {Link} from 'react-router-dom';
-import {Header} from "antd/es/layout/layout";
+import React, { useRef } from 'react';
+import { Carousel, Card } from 'antd';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import './Reviews.css';
+import DecoratedTitle from "./DecoratedTitle";
 
 const reviews = [
     {
@@ -16,35 +17,56 @@ const reviews = [
         name: "Andreea & Paul",
         content: "Cinematografia este de top. Suntem foarte recunoscători pentru munca voastră minunată!",
     },
+    {
+        name: "Diana & Alex",
+        content: "Un film care ne face să retrăim toate emoțiile zilei! O echipă fantastică!",
+    },
 ];
 
+const groupReviews = (array, size = 2) => {
+    const chunks = [];
+    for (let i = 0; i < array.length; i += size) {
+        chunks.push(array.slice(i, i + size));
+    }
+    return chunks;
+};
+
 const Reviews = () => {
+    const carouselRef = useRef();
+    const grouped = groupReviews(reviews);
+
     return (
-        <div style={{maxWidth: '700px', margin: '0 auto', padding: '60px 20px', marginTop: '100px'}}>
-            <Carousel autoplay dotPosition="bottom">
-                {reviews.map((review, index) => (
-                    <div key={index}>
-                        <Card
-                            style={{
-                                margin: '0 auto',
-                                textAlign: 'center',
-                                padding: '40px 30px',
-                                borderRadius: 20,
-                                border: '1px solid #d2b6a2',
-                                backgroundColor: 'black',
-                                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                            }}
-                        >
-                            <p style={{
-                                fontStyle: 'italic',
-                                fontSize: '1.1rem',
-                                marginBottom: 20
-                            }}>"{review.content}"</p>
-                            <strong style={{color: '#a78b71'}}>– {review.name}</strong>
-                        </Card>
-                    </div>
-                ))}
-            </Carousel>
+        <div className="reviews-container">
+            <div className="carousel-wrapper">
+                <LeftOutlined
+                    className="carousel-arrow left"
+                    onClick={() => carouselRef.current?.prev()}
+                />
+                <Carousel
+                    autoplay
+                    dots
+                    ref={carouselRef}
+                    className="reviews-carousel"
+                >
+                    {grouped.map((pair, i) => (
+                        <div key={i}>
+                            <div className="review-slide">
+                                {pair.map((review, idx) => (
+                                    <Card className="review-card" key={idx}>
+                                        <div className="quote-icon">“</div>
+                                        <p className="review-text">"{review.content}"</p>
+                                        <div className="review-author">– {review.name}</div>
+                                    </Card>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </Carousel>
+                <RightOutlined
+                    className="carousel-arrow right"
+                    onClick={() => carouselRef.current?.next()}
+                />
+            </div>
         </div>
     );
 };

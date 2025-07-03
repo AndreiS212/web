@@ -1,6 +1,7 @@
 .image-container {
     position: relative;
     overflow: hidden;
+    margin-top: -100px;
 }
 
 .image-container img {
@@ -13,7 +14,8 @@
 
 .overlay {
     position: absolute;
-    top: 0;
+    height: 600px;
+    top: 200px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -23,9 +25,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #d2b6a2;
     font-size: 40px;
-    font-family: 'Roboto Mono', serif;
+    font-family: 'Playfair Display SC', serif;
     text-transform: uppercase;
 }
 

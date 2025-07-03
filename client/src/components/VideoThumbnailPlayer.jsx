@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const VideoThumbnailPlayer = ({ videoId, style, overlayText }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+const VideoThumbnailPlayer = ({ videoId, style, overlayText, thumbnailSrc, autoPlay = false }) => {
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [thumbnail, setThumbnail] = useState('');
 
   const handlePlay = () => {
@@ -9,7 +9,7 @@ const VideoThumbnailPlayer = ({ videoId, style, overlayText }) => {
   };
 
   // Use vimeo's HD thumbnail URL
-  const thumbnailUrl = `https://vumbnail.com/${videoId}.jpg`; // Regular thumbnail
+  const thumbnailUrl = thumbnailSrc || `https://vumbnail.com/${videoId}.jpg`; // Regular thumbnail
 
   // Fetch the thumbnail when the component mounts
   useEffect(() => {

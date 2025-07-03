@@ -79,10 +79,11 @@
 }
 
 .names {
-    font-size: 35px;
+    font-size: 25px;
     color: #d2b6a2;
     text-transform: none;
-    font-family: "Playwrite RO", cursive;
+    /*font-family: "Playwrite RO", cursive;*/
+    font-family: "Playfair Display SC", serif;
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;

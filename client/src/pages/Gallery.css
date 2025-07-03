@@ -1,0 +1,12 @@
+.custom-anchor .ant-anchor-link-title {
+    color: #d2b6a2 !important;
+    font-family: "Roboto Mono", serif;
+}
+
+.custom-anchor .ant-anchor-link-title:hover {
+    color: white !important;
+}
+
+.custom-anchor .ant-anchor-ink::before {
+    background-color: #d2b6a2 !important;
+}
