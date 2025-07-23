@@ -46,20 +46,20 @@ const About = () => {
                     {/* Text container */}
                     <div style={{ flex: '2 1 400px', minWidth: 280 }}>
 
-                        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', fontFamily: 'Segoe UI' }}>
+                        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', fontFamily: 'Playfair Display' }}>
                             Salut, sunt <strong>Luca</strong>, videograf si storyteller, specializat în surprinderea celor mai frumoase
                             momente din viața voastră.
                         </p>
 
-                        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', fontFamily: 'Segoe UI'}}>
+                        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', fontFamily: 'Playfair Display'}}>
                             De peste <strong>7</strong> ani, văd oamenii “cu alt ochi”... unul care are mereu zoom-ul la el!📸
                         </p>
 
-                        <p style={{ fontSize: '1.1rem', marginBottom: '2.5rem', fontFamily: 'Segoe UI' }}>
+                        <p style={{ fontSize: '1.1rem', marginBottom: '2.5rem', fontFamily: 'Playfair Display' }}>
                             Cele mai frumoase povești sunt cele naturale, iar eu sunt doar un martor tăcut, cu camera în mână.
                         </p>
 
-                        <p style={{ fontSize: '1.1rem', marginBottom: '2.5rem', fontFamily: 'Segoe UI' }}>
+                        <p style={{ fontSize: '1.1rem', marginBottom: '2.5rem', fontFamily: 'Playfair Display' }}>
                             Dacă mă vezi încruntat în timp ce filmez, nu înseamnă că vreau să te bat... Așa sunt eu :)).
                         </p>
 

@@ -8,6 +8,7 @@ import About from "./pages/About";  // Assuming your Reviews page component is h
 import AdminDashboard from './admin/AdminDashboard';
 import Services from './pages/Services';
 import Gallery from './pages/Gallery';
+import Cadre from "./pages/Cadre";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/admin" element={<AdminDashboard />} />  {/* Reviews page route */}
           <Route path="/services" element={<Services />} />  {/* Reviews page route */}
           <Route path="/gallery" element={<Gallery />} />  {/* Reviews page route */}
+          <Route path="/cadre" element={<Cadre />} />  {/* Reviews page route */}
         </Routes>
       </Router>
   );

@@ -9,14 +9,7 @@ import PhotoGrid from "../components/PhotoGrid";
 import DecoratedTitle from "../components/DecoratedTitle";
 
 const { Content } = Layout;
-
-// const WavyLine = () => (
-//     <svg width="100" height="20" viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg" fill="none" style={{ margin: '16px auto' }}>
-//         <path d="M0 10 Q25 0, 50 10 T100 10" stroke="#d2b6a2" strokeWidth="2" fill="none" />
-//     </svg>
-// );
-
-const VerticalLineWithCircle = () => (
+const VerticalLine = () => (
     <svg
         width="24"
         height="80"
@@ -25,7 +18,7 @@ const VerticalLineWithCircle = () => (
         xmlns="http://www.w3.org/2000/svg"
         style={{ display: "block", margin: "0 auto" }}
     >
-        <line x1="12" y1="0" x2="12" y2="80" stroke="#d2b6a2" strokeWidth="2" />
+        <line x1="12" y1="0" x2="12" y2="80" stroke="#d2b6a2" strokeWidth="1" />
     </svg>
 );
 
@@ -39,12 +32,12 @@ const NamesWithDecoration = ({ names, locationText = "- Locatie -" }) => (
             marginRight: "60px"
         }}
     >
-        <VerticalLineWithCircle />
+        <VerticalLine />
         <p className="names" style={{ margin: "20px 0 10px" }}>
             {names}
         </p>
         <p style={{ fontSize: "20px" }}>{locationText}</p>
-        <VerticalLineWithCircle />
+        <VerticalLine />
     </div>
 );
 

@@ -4,20 +4,21 @@ import { Link } from "react-router-dom";
 import { Header } from "antd/es/layout/layout";
 
 const CustomHeader = () => {
-    const leftItems = ['Acasa', 'Povestea mea', 'Galerie'];
-    const rightItems = ['Servicii', 'Contact', 'Login'];
+    const leftItems = ['Acasa', 'Povestea mea', 'Film'];
+    const rightItems = ['Cadre', 'Servicii', 'Contact'];
 
     const generateItems = (keys) =>
         keys.map(key => ({
             key,
             label: (
                 <Link to={
-                    key === 'Galerie' ? '/gallery' :
-                        key === 'Contact' ? '/contact' :
-                            key === 'Povestea mea' ? '/about' :
-                                key === 'Servicii' ? '/services' :
-                                    key === 'Login' ? '/admin' :
-                                        '/'
+                    key === 'Film' ? '/gallery' :
+                        key === 'Cadre' ? '/cadre':
+                            key === 'Contact' ? '/contact' :
+                                key === 'Povestea mea' ? '/about' :
+                                    key === 'Servicii' ? '/services' :
+                                        key === 'Login' ? '/admin' :
+                                            '/'
                 }>
                     {key}
                 </Link>

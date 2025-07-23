@@ -1,45 +1,44 @@
 import {Link} from "react-router-dom";
 import React from "react";
-import {Footer} from "antd/es/layout/layout";
+import { Footer } from "antd/es/layout/layout";
+import { MailOutlined, PhoneOutlined, EnvironmentOutlined } from "@ant-design/icons";
 
 const CustomFooter = () => {
     return (
         <Footer style={{
         textAlign: 'center',
         background: 'linear-gradient(to right, #2f2f2f, #000)',
-        padding: '40px 0',
+        // padding: '40px 0',
         color: '#fff',
         borderTop: '1px solid #d2b6a2',
-        fontFamily: 'Segoe UI',
+        fontFamily: 'Playfair Display',
         fontSize: '14px',
     }}>
         <div>
-            <p style={{fontSize: '16px', marginBottom: '20px'}}>
-                <strong>AnDi Design</strong> ©{new Date().getFullYear()} - Created by Andrei Sigartau
-            </p>
-            <div style={{marginBottom: '20px'}}>
-                <Link to="/privacy-policy" style={{color: '#d2b6a2', marginRight: '15px'}}>
-                    Privacy Policy
-                </Link>
-                <Link to="/terms" style={{color: '#d2b6a2', marginRight: '15px'}}>
-                    Terms of Service
-                </Link>
-                <Link to="/contact" style={{color: '#d2b6a2'}}>
-                    Contact
-                </Link>
-            </div>
+            <Link to="/" style={{ marginBottom: '8px' }}>
+                <img
+                    src="/logogold.png"
+                    alt="Logo"
+                    style={{
+                        height: '60px',
+                        width: 'auto',
+                        cursor: 'pointer',
+                    }}
+                />
+            </Link>
             <div style={{marginTop: '20px'}}>
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                     <i className="fab fa-facebook"
                        style={{color: '#d2b6a2', marginRight: '20px', fontSize: '18px'}}/>
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://instagram.com/lucasframes.storyteller" target="_blank" rel="noopener noreferrer">
                     <i className="fab fa-instagram"
                        style={{color: '#d2b6a2', marginRight: '20px', fontSize: '18px'}}/>
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-twitter" style={{color: '#d2b6a2', fontSize: '18px'}}/>
-                </a>
+            </div>
+            {/* Copyright */}
+            <div style={{ fontSize: '11px', color: '#aaa', marginTop: '20px' }}>
+                © {new Date().getFullYear()} Luca's Frames. Toate drepturile rezervate.
             </div>
         </div>
     </Footer>
