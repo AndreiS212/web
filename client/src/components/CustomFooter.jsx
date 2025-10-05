@@ -17,7 +17,7 @@ const CustomFooter = () => {
         <div>
             <Link to="/" style={{ marginBottom: '8px' }}>
                 <img
-                    src="/logogold.png"
+                    src="https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262024/logogold_v630lh.png"
                     alt="Logo"
                     style={{
                         height: '60px',

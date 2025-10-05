@@ -109,13 +109,13 @@ const Homepage = () => {
     };
 
     const carouselItems = [
-        '/lovestory1-19.jpg',
-        '/nunta-3-5.jpg',
-        '/lovestory1-10.jpg',
-        '/nunta3-7.jpg',
-        '/nunta3-4.jpg',
-        '/nunta1-9.jpg',
-        'nunta2-12.jpg'
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262039/lovestory1-19.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262053/nunta-3-5_sd0kny.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262036/lovestory1-10_t6rux6.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262055/nunta3-7_cjijci.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262053/nunta3-4_cevogz.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262043/nunta1-9_hc85kp.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262050/nunta2-12_rwycep.jpg'
     ];
 
 

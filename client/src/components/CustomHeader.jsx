@@ -57,7 +57,7 @@ const CustomHeader = () => {
             {/* Logo */}
             <Link to="/" style={{ display: 'flex', alignItems: 'center', margin: '0 20px' }}>
                 <img
-                    src="/lfgold.png"
+                    src="https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262027/lfgold_v6zjbg.png"
                     alt="Logo"
                     style={{
                         height: '150px', // smaller to make it sit higher

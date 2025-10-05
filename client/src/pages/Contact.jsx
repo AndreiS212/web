@@ -65,7 +65,7 @@ const Contact = () => {
                 style={{ position: 'relative' }}
             >
                 <img
-                    src="/nunta3-8.jpg"
+                    src="https://res.cloudinary.com/dbapyuq1g/image/upload/v1759669216/nunta3-8_weqbqk.jpg"
                     alt="homeheader"
                     style={{
                         width: '99vw',

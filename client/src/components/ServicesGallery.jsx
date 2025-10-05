@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import './ServicesGallery.css';
 
 const photos = [
-    { src: '/cununie1.jpg', text: 'Cununii', link: '/gallery#cununii' },
-    { src: '/nunta3-6.jpg', text: 'Nunti', link: '/gallery#nunti' },
-    { src: '/lovestory-1-17.jpg', text: 'Love Story', link: '/gallery#lovestory' },
-    { src: '/img.png', text: 'Botezuri', link: '/gallery#botezuri' },
+    { src: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262023/cununie1_amizrl.jpg', text: 'Cununii', link: '/gallery#cununii' },
+    { src: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262054/nunta3-6_pwrjaz.jpg', text: 'Nunti', link: '/gallery#nunti' },
+    { src: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262037/lovestory-1-17_zqsrzs.jpg', text: 'Love Story', link: '/gallery#lovestory' },
+    { src: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1759668922/img_g45hfj.png', text: 'Botezuri', link: '/gallery#botezuri' },
 ];
 
 const ServicesGallery = () => {

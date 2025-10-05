@@ -5,7 +5,6 @@ import VideoThumbnailPlayer from "../components/VideoThumbnailPlayer";
 import CustomHeader from "../components/CustomHeader";
 import CustomFooter from "../components/CustomFooter";
 import "./Gallery.css";
-import PhotoGrid from "../components/PhotoGrid";
 import DecoratedTitle from "../components/DecoratedTitle";
 import ScrollToHashElement from "../components/ScrollToHashElement";
 import {useNavigate} from "react-router-dom";
@@ -118,7 +117,7 @@ const Gallery = () => {
             videos: [
                 {
                     videoId: "1087340348",
-                    thumbnailSrc: "/cununie1.jpg",
+                    thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262023/cununie1_amizrl.jpg',
                     names: "Roxana & Remus",
                     locationText: "Locatie",
                     eveniment: '/CununieRoxanaRemus'
@@ -133,14 +132,14 @@ const Gallery = () => {
             videos: [
                 {
                     videoId: "1045287269",
-                    thumbnailSrc: "/nunta-3-3.jpg",
+                    thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262053/nunta-3-3_nczvvm.jpg',
                     names: "Roxana & Dragos",
                     locationText: "Locatie",
                     eveniment: '/NuntaRoxanaDragos'
                 },
                 {
                     videoId: "1095230919",
-                    thumbnailSrc: "/nunta-1-8.jpg",
+                    thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262042/nunta-1-8_zqartn.jpg',
                     names: "Andreea & Alin",
                     locationText: "Locatie",
                     eveniment: '/NuntaAndreeaAlin'
@@ -197,7 +196,7 @@ const Gallery = () => {
             videos: [
                 {
                     videoId: "1097881705",
-                    thumbnailSrc: "/lovestory1-9.jpg",
+                    thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262035/lovestory1-9_yenlsw.jpg',
                     names: "Gabriela & Andrei",
                     locationText: "Locatie",
                     eveniment: '/LoveStoryGabrielaAndrei'
@@ -212,7 +211,7 @@ const Gallery = () => {
             videos: [
                 {
                     videoId: "https://vimeo.com/1088465244",
-                    thumbnailSrc: "/botez1-5.jpg",
+                    thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262019/botez1-5.jpg',
                     names: "Vlad",
                     locationText: "Locatie",
                     eveniment: '/BotezVlad'
@@ -232,7 +231,9 @@ const Gallery = () => {
                     transition={{ duration: 0.8 }}
                     style={{ position: 'relative' }}
                 >
-                    <img src='/lovestory-1-17.jpg' alt='header' style={{
+                    <img src='https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262037/lovestory-1-17_zqsrzs.jpg'
+                         alt='header'
+                         style={{
                         width: '99vw',
                         height: '640px',
                         border: 'none',

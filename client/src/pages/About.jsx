@@ -19,7 +19,7 @@ const About = () => {
                 transition={{ duration: 0.8 }}
                 style={{ position: 'relative' }}
             >
-                <img src='/nunta3-7.jpg' alt='header' style={{
+                <img src='https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262055/nunta3-7_cjijci.jpg' alt='header' style={{
                     width: '99vw',
                     height: '640px',
                     border: 'none',

@@ -127,7 +127,7 @@ const Services = () => {
                 style={{ position: 'relative' }}
             >
                 <img
-                    src='/nunta-3-5.jpg'
+                    src='https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262053/nunta-3-5_sd0kny.jpg'
                     alt='homeheader'
                     style={{
                         width: '100vw',
