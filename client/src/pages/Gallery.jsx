@@ -1,5 +1,5 @@
-import React from "react";
-import {Row, Col, Layout, Anchor, Splitter, Button} from "antd";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Layout, Anchor, Button } from "antd";
 import { motion } from "framer-motion";
 import VideoThumbnailPlayer from "../components/VideoThumbnailPlayer";
 import CustomHeader from "../components/CustomHeader";
@@ -7,86 +7,99 @@ import CustomFooter from "../components/CustomFooter";
 import "./Gallery.css";
 import DecoratedTitle from "../components/DecoratedTitle";
 import ScrollToHashElement from "../components/ScrollToHashElement";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
-const VerticalLine = () => (
+
+const VerticalLine = ({ isMobile }) => (
     <svg
-        width="24"
-        height="80"
+        width={isMobile ? "0" : "24"}         // smaller width on mobile
+        height={isMobile ? "0" : "80"}       // shorter height
         viewBox="0 0 24 80"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{ display: "block", margin: "0 auto" }}
     >
-        <line x1="12" y1="0" x2="12" y2="80" stroke="#d2b6a2" strokeWidth="1" />
+        <line
+            x1={isMobile ? "6" : "12"}       // center line on mobile
+            y1="0"
+            x2={isMobile ? "6" : "12"}
+            y2={isMobile ? "40" : "80"}
+            stroke="#d2b6a2"
+            strokeWidth="1"
+        />
     </svg>
 );
 
-const NamesWithDecoration = ({ names, locationText = "- Locatie -", eveniment }) => {
+const NamesWithDecoration = ({ names, locationText = "- Locatie -", eveniment, isMobile }) => {
     const navigate = useNavigate();
     return (
         <div
             style={{
                 textAlign: "center",
-                padding: "20px",
+                padding: isMobile ? "2px 0" : "5px 0", // smaller padding
                 fontFamily: "Playfair Display",
                 textTransform: "uppercase",
-                marginRight: "60px"
+                marginBottom: isMobile ? '80px' : '0px',
+                marginTop: isMobile ? '30px' : '0px'
             }}
         >
-            <VerticalLine/>
-            <p className="names" style={{margin: "20px 0 10px"}}>
+            <VerticalLine isMobile={isMobile} />
+            <p
+                className="names"
+                style={{
+                    margin: isMobile ? "2px 0 1px" : "5px 0 3px", // smaller margins
+                    fontSize: isMobile ? "16px" : "18px",
+                    fontWeight: 500,
+                }}
+            >
                 {names}
             </p>
-            <p style={{fontSize: "20px"}}>{locationText}</p>
-            <Button style={{
-                padding: '12px 28px',
-                background: 'linear-gradient(to right, #d2b6a2, #e6d2c3)',
-                color: '#000',
-                fontSize: '1rem',
-                border: 'none',
-                borderRadius: '30px',
-                cursor: 'pointer',
-                fontFamily: 'Playfair Display SC, serif',
-                fontWeight: 400,
-                letterSpacing: '0.5px',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 4px 10px rgba(210, 182, 162, 0.3)',
-                marginBottom: '20px'
-            }}
-                    onClick={() => navigate(eveniment)}>
+            <p style={{ fontSize: isMobile ? "10px" : "16px", margin: isMobile ? "1px 0" : "3px 0" }}>
+                {locationText}
+            </p>
+            <Button
+                style={{
+                    padding: isMobile ? "4px 10px" : "8px 20px",
+                    fontSize: isMobile ? "0.7rem" : "0.9rem",
+                    borderRadius: isMobile ? "16px" : "25px",
+                    marginTop: "4px",
+                    marginBottom: isMobile ? "2px" : "4px",
+                }}
+                onClick={() => navigate(eveniment)}
+            >
                 Povestea lor
             </Button>
-            <VerticalLine/>
+            <VerticalLine isMobile={isMobile} />
         </div>
     );
-}
+};
 
-const VideoSectionRow = ({
-                             videoId,
-                             thumbnailSrc,
-                             names,
-                             locationText,
-                             eveniment,
-                             reverse = false,
-                             height = 500,
-                         }) => {
+const VideoSectionRow = ({ videoId, thumbnailSrc, names, locationText, eveniment, reverse = false }) => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     return (
         <div
             style={{
                 display: "flex",
-                flexDirection: reverse ? "row-reverse" : "row",
-                height,
-                marginBottom: "2rem",
-                gap: "20px",
+                flexDirection: isMobile ? "column" : reverse ? "row-reverse" : "row", // <-- column on mobile
+                marginBottom: isMobile ? "0.5rem" : "1.5rem",
+                marginTop: isMobile ? "90px" : "0px",
+                gap: isMobile ? "4px" : "10px",
             }}
         >
             <div
                 style={{
-                    flexBasis: "70%",
-                    flexShrink: 0,
-                    padding: reverse ? "0 0 0 20px" : "0 20px 0 0",
+                    width: isMobile ? "100%" : "70%",
+                    flexGrow: 1,
+                    height: isMobile ? "150px" : "600px",
                 }}
             >
                 <VideoThumbnailPlayer videoId={videoId} thumbnailSrc={thumbnailSrc} />
@@ -94,20 +107,33 @@ const VideoSectionRow = ({
 
             <div
                 style={{
-                    flexBasis: "30%",
-                    flexShrink: 0,
+                    width: isMobile ? "100%" : "30%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                 }}
             >
-                <NamesWithDecoration names={names} locationText={locationText} eveniment={eveniment} />
+                <NamesWithDecoration
+                    names={names}
+                    locationText={locationText}
+                    eveniment={eveniment}
+                    isMobile={isMobile}
+                />
             </div>
         </div>
     );
 };
 
 const Gallery = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     const sections = [
         {
             id: "cununii",
@@ -224,47 +250,62 @@ const Gallery = () => {
         <Layout style={{ minHeight: "100vh", background: "black" }}>
             <CustomHeader />
             <ScrollToHashElement />
-            <Content style={{ marginTop: "30px" }}>
+            <Content style={{ marginTop: "30px", padding: isMobile ? "0 10px" : "0 48px" }}>
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    style={{ position: 'relative' }}
+                    style={{ position: "relative" }}
                 >
-                    <img src='https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262037/lovestory-1-17_zqsrzs.jpg'
-                         alt='header'
-                         style={{
-                        width: '99vw',
-                        height: '640px',
-                        border: 'none',
-                        display: 'block',
-                        objectFit: 'cover',
-                        margin: '0',
-                        padding: '0',
-                        zIndex: 1,
-                        position: 'relative',
-                        marginTop: '-160px',
-                    }}/>
+                    <img
+                        src="https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262037/lovestory-1-17_zqsrzs.jpg"
+                        alt="header"
+                        style={{
+                            width: '95.9vw',
+                            height: '640px',
+                            objectFit: 'cover',
+                            marginTop: '-150px',
+                            position: 'relative',
+                            zIndex: 1,
+                        }}
+                    />
                 </motion.div>
 
                 <Row gutter={16}>
-                    <Col flex="200px">
-                        <Anchor
-                            className="custom-anchor"
-                            offsetTop={100}
-                            style={{ position: "sticky", top: 100, marginTop: "100px" }}
-                            affix={false}
-                            items={sections.map(({ id, title }) => ({
-                                key: id,
-                                href: `#${id}`,
-                                title: title.toUpperCase(),
-                            }))}
-                        />
-                    </Col>
+                    {!isMobile && (
+                        <Col flex="200px">
+                            <Anchor
+                                className="custom-anchor"
+                                offsetTop={100}
+                                style={{ position: "sticky", top: 100, marginTop: "100px" }}
+                                affix={false}
+                                items={sections.map(({ id, title }) => ({
+                                    key: id,
+                                    href: `#${id}`,
+                                    title: title.toUpperCase(),
+                                }))}
+                            />
+
+                        </Col>
+                    )}
                     <Col flex="auto">
+                        {/* Mobile Anchor at top */}
+                        {isMobile && (
+                            <div style={{ marginBottom: "20px", textAlign: "center" }}>
+                                <Anchor
+                                    className="custom-anchor"
+                                    affix={false}
+                                    items={sections.map(({ id, title }) => ({
+                                        key: id,
+                                        href: `#${id}`,
+                                        title: title.toUpperCase(),
+                                    }))}
+                                />
+                            </div>
+                        )}
                         {sections.map(({ id, title, align, reverse, videos }) => (
-                            <div id={id} key={id} style={{ marginBottom: "4rem" }}>
-                                <DecoratedTitle text={title} align={align}/>
+                            <div id={id} key={id} style={{ marginBottom: "3rem" }}>
+                                <DecoratedTitle text={title} align={align} />
                                 {videos.map(({ videoId, thumbnailSrc, names, locationText, eveniment }, idx) => (
                                     <VideoSectionRow
                                         key={videoId + idx}

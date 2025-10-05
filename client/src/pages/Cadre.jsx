@@ -1,6 +1,6 @@
 import {Layout} from "antd";
 import CustomHeader from "../components/CustomHeader";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import CustomFooter from "../components/CustomFooter";
 import DecoratedTitle from "../components/DecoratedTitle";
 import PhotoGrid from "../components/PhotoGrid";

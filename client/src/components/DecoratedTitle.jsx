@@ -1,5 +1,5 @@
 // components/DecoratedTitle.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const lineStyle = {
     height: '1px',
@@ -18,7 +18,18 @@ const fixedLineStyle = {
 };
 
 const DecoratedTitle = ({ text, align = 'center' }) => {
-    if (align === 'left') {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const effectiveAlign = isMobile ? 'center' : align;
+
+    if (effectiveAlign === 'left') {
         return (
             <div style={{
                 display: 'flex',
@@ -27,7 +38,6 @@ const DecoratedTitle = ({ text, align = 'center' }) => {
                 margin: '60px 0 30px',
                 gap: '10px',
             }}>
-                {/* small line BEFORE the text */}
                 <div style={smallLineStyle} />
                 <span style={{
                     fontSize: '1.8rem',
@@ -40,7 +50,7 @@ const DecoratedTitle = ({ text, align = 'center' }) => {
                 <div style={{ flex: 1, height: '1px', ...lineStyle }} />
             </div>
         );
-    } else if (align === 'right') {
+    } else if (effectiveAlign === 'right') {
         return (
             <div style={{
                 display: 'flex',
@@ -58,12 +68,11 @@ const DecoratedTitle = ({ text, align = 'center' }) => {
                     color: '#d2b6a2',
                     whiteSpace: 'nowrap'
                 }}>{text}</span>
-                {/* small line AFTER the text */}
                 <div style={smallLineStyle} />
             </div>
         );
     } else {
-        // center (default) - equal fixed width lines left and right
+        // center (default)
         return (
             <div style={{
                 display: 'flex',

@@ -34,3 +34,23 @@
 .image-container:hover .overlay {
     opacity: 1;
 }
+
+/* ✅ MOBILE STYLING */
+@media (max-width: 768px) {
+    .image-container {
+        margin-top: -170px;
+        margin-bottom: -10px;
+    }
+
+    .overlay {
+        height: 300px;
+        top: 0;
+        font-size: 100px; /* smaller text */
+        background-color: rgba(0, 0, 0, 0.3); /* lighter overlay */
+    }
+
+    .image-container .overlay {
+        opacity: 1; /* still works on mobile (for tablets/touch hover) */
+        margin-top: 200px;
+    }
+}

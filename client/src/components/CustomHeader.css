@@ -1,0 +1,44 @@
+/* Base transition for all items */
+.ant-menu-dark .ant-menu-item {
+    background-color: transparent !important;
+    transition: color 0.5s ease, background-color 0.5s ease;
+}
+
+/* Hover (already done but keep it consistent) */
+.ant-menu-dark .ant-menu-item:hover {
+    background-color: transparent !important;
+    color: #f1d6b8 !important;
+}
+
+/* Selected item fade effect */
+.ant-menu-dark .ant-menu-item-selected {
+    background-color: transparent !important;
+    color: #d2b6a2 !important;
+    transition: color 0.8s ease; /* smooth fade to selected color */
+}
+
+/* Optional: if you want a subtle glow when selected */
+.ant-menu-dark .ant-menu-item-selected a {
+    text-shadow: 0 0 6px rgba(210, 182, 162, 0.5);
+    transition: text-shadow 0.8s ease, color 0.8s ease;
+}
+
+/* Optional: fade between hover and selected states */
+.ant-menu-dark .ant-menu-item a {
+    transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+.ant-menu-dark .ant-menu-item:active {
+    color: #f1d6b8 !important;
+    transition: color 0.3s ease;
+}
+
+.ant-menu-dark .ant-menu-item a {
+    font-family: 'Playfair Display SC', serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #d2b6a2 !important;
+    transition: color 0.4s ease;
+}
+

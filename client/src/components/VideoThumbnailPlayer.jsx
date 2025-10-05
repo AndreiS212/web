@@ -3,6 +3,14 @@ import React, { useState, useEffect } from 'react';
 const VideoThumbnailPlayer = ({ videoId, style, overlayText, thumbnailSrc, autoPlay = false }) => {
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [thumbnail, setThumbnail] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handlePlay = () => {
     setIsPlaying(true);
@@ -21,13 +29,13 @@ const VideoThumbnailPlayer = ({ videoId, style, overlayText, thumbnailSrc, autoP
   const containerStyle = {
     position: 'relative',
     width: '100%',
-    height: '70%',
+    height: isMobile? '150%' : '70%',
     maxHeight: '500px',
     backgroundColor: 'transparent',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '72px',
+    marginTop: isMobile ? '-50px' : '72px',
     ...style,
   };
 

@@ -7,6 +7,6 @@
     color: white !important;
 }
 
-.custom-anchor .ant-anchor-ink::before {
+.custom-anchor .ant-anchor-ink-visible {
     background-color: #d2b6a2 !important;
 }

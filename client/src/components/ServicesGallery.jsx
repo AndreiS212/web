@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import './ServicesGallery.css';
@@ -12,10 +12,14 @@ const photos = [
 
 const ServicesGallery = () => {
     const navigate = useNavigate();
+    const [isMobile, setIsMobile] = useState(false);
 
-    const handleClick = (link) => {
-        navigate(link);
-    };
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     return (
         <Row gutter={[16, 16]}>
@@ -24,14 +28,30 @@ const ServicesGallery = () => {
                     <a
                         href={photo.link}
                         className="image-container"
-                        style={{ cursor: 'pointer', display: 'block' }}
+                        style={{
+                            cursor: 'pointer',
+                            display: 'block',
+                            height: isMobile ? '500px' : '800px',
+                            width: isMobile ? '370px' : '340px',
+                            marginLeft: isMobile ? '-30px' : '0'
+                        }}
                     >
                         <img
                             src={photo.src}
                             alt={`panel-${index}`}
                             className="gallery-image"
+                            style={{
+                                width: isMobile ? '400px' : '100%',
+                                height: isMobile ? '300px' : '80%',
+                            }}
                         />
-                        <div className="overlay">
+                        <div
+                            className="overlay"
+                            style={{
+                                fontSize: isMobile ? '0.9rem' : '1.2rem',
+                                padding: isMobile ? '6px 10px' : '10px 20px',
+                            }}
+                        >
                             {photo.text}
                         </div>
                     </a>

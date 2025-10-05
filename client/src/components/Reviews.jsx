@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { Carousel, Card } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import './Reviews.css';
@@ -34,6 +34,14 @@ const groupReviews = (array, size = 2) => {
 const Reviews = () => {
     const carouselRef = useRef();
     const grouped = groupReviews(reviews);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     return (
         <div className="reviews-container">
@@ -41,11 +49,13 @@ const Reviews = () => {
                 <LeftOutlined
                     className="carousel-arrow left"
                     onClick={() => carouselRef.current?.prev()}
+                    style={{marginTop: isMobile ? '-40px' : '0px'}}
                 />
                 <Carousel
                     autoplay
                     dots
                     ref={carouselRef}
+                    style={{marginTop: '-40px'}}
                     className="reviews-carousel"
                 >
                     {grouped.map((pair, i) => (
@@ -65,6 +75,7 @@ const Reviews = () => {
                 <RightOutlined
                     className="carousel-arrow right"
                     onClick={() => carouselRef.current?.next()}
+                    style={{marginTop: isMobile ? '-40px' : '0px'}}
                 />
             </div>
         </div>

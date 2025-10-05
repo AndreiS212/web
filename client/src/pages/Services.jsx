@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout } from 'antd';
 import CustomHeader from "../components/CustomHeader";
 import CustomFooter from "../components/CustomFooter";
@@ -8,12 +8,21 @@ import DecoratedTitle from '../components/DecoratedTitle';
 const { Content } = Layout;
 
 const Services = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const containerStyle = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '60px',
-        margin: '60px auto',
+        gap: isMobile ? '40px' : '60px',
+        margin: isMobile ? '40px 20px' : '60px auto',
         maxWidth: '1000px',
     };
 
@@ -39,77 +48,73 @@ const Services = () => {
 
     const assistantDescriptionStyle = {
         marginBottom: '10px',
-        fontSize: '16px',
+        fontSize: isMobile ? '14px' : '16px',
         textAlign: 'center',
         fontStyle: 'italic',
         color: "#d2b6a2"
     };
 
-    const tickList = (items) => {
-        return (
-            <ul style={{ paddingLeft: 0, listStyle: 'none', marginTop: 0 }}>
-                {items.map((item, i) => (
-                    <li
-                        key={i}
+    const tickList = (items) => (
+        <ul style={{ paddingLeft: 0, listStyle: 'none', marginTop: 0 }}>
+            {items.map((item, i) => (
+                <li
+                    key={i}
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        marginBottom: '5px',
+                        color: 'white',
+                        fontSize: isMobile ? '16px' : '18px',
+                        fontWeight: 200,
+                        fontFamily: 'Playfair Display SC',
+                    }}
+                >
+                    <p
                         style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '10px',
-                            marginBottom: '5px',
-                            color: 'white',
-                            fontSize: '18px',
-                            fontWeight: 200,
-                            fontFamily: 'Playfair Display SC',
+                            color: '#d2b6a2',
+                            fontSize: isMobile ? '18px' : '20px',
+                            position: 'relative',
+                            top: '2px',
+                            margin: 0,
                         }}
                     >
-                        <p
-                            style={{
-                                color: '#d2b6a2',
-                                fontSize: '20px',
-                                position: 'relative',
-                                top: '2px',
-                                margin: 0,
-                            }}
-                        >
-                            &
-                        </p>
-                        <span>{item}</span>
-                    </li>
-                ))}
-            </ul>
-        );
-    };
+                        &amp;
+                    </p>
+                    <span>{item}</span>
+                </li>
+            ))}
+        </ul>
+    );
 
     const Package = ({ index, imgSrc, imgAlt, title, align, description, details }) => {
         const isEven = index % 2 === 0;
 
         return (
             <div style={{ maxWidth: '1000px', margin: '40px auto', width: '100%' }}>
-                {/* Title outside flex container */}
                 <DecoratedTitle text={title} align={align} />
                 {description && <p style={assistantDescriptionStyle}>{description}</p>}
 
                 <div
                     style={{
                         display: 'flex',
-                        flexDirection: isEven ? 'row' : 'row-reverse',
+                        flexDirection: isMobile ? 'column' : isEven ? 'row' : 'row-reverse',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        gap: '40px',
-                        flexWrap: 'nowrap',
+                        gap: isMobile ? '20px' : '40px',
                         marginTop: '10px',
                     }}
                 >
-                    <div style={{ ...imageContainerStyle, width: '65%' }}>
+                    <div style={{ ...imageContainerStyle, width: isMobile ? '100%' : '65%' }}>
                         <img
                             src={imgSrc}
                             alt={imgAlt}
-                            style={{ ...imageStyle, width: '100%', height: 'auto' }}
+                            style={{ ...imageStyle, width: '100%', height: isMobile ? 'auto' : 'auto' }}
                             draggable={false}
                         />
                     </div>
 
-                    <div style={{ ...textBlockStyle, width: '35%', fontSize: '16px' }}>
+                    <div style={{ ...textBlockStyle, width: isMobile ? '100%' : '35%' }}>
                         {tickList(details)}
                     </div>
                 </div>
@@ -127,32 +132,26 @@ const Services = () => {
                 style={{ position: 'relative' }}
             >
                 <img
-                    src='https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262053/nunta-3-5_sd0kny.jpg'
+                    src='https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262050/nunta2-14_dkuala.jpg'
                     alt='homeheader'
                     style={{
-                        width: '100vw',
-                        height: '660px',
-                        border: 'none',
-                        display: 'block',
+                        width: '99vw',
+                        height: '640px',
                         objectFit: 'cover',
-                        margin: '0',
-                        padding: '0',
-                        zIndex: 1,
+                        marginTop: '-150px',
                         position: 'relative',
-                        marginTop: '-140px',
+                        zIndex: 1,
                     }}
                 />
             </motion.div>
-            <Content>
 
+            <Content>
                 <DecoratedTitle text="Servicii" align="left" />
 
-                {/* Packages container */}
                 <div style={containerStyle}>
-
                     <Package
                         index={1}
-                        imgSrc="/nunta3-4.jpg"
+                        imgSrc="https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262053/nunta3-4_cevogz.jpg"
                         imgAlt="Pachet 1"
                         title="Pachetul 1 - €800"
                         align="right"
@@ -167,7 +166,7 @@ const Services = () => {
 
                     <Package
                         index={2}
-                        imgSrc="/nunta2-2.jpg"
+                        imgSrc="https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262043/nunta2-2_qibxrj.jpg"
                         imgAlt="Pachet 2"
                         title="Pachetul 2 - €1200"
                         align="left"
@@ -184,7 +183,7 @@ const Services = () => {
 
                     <Package
                         index={3}
-                        imgSrc="/lovestory1-12.jpg"
+                        imgSrc="https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262035/lovestory1-12_dlxmc8.jpg"
                         imgAlt="Pachet 3"
                         title="Pachetul 3 - €1600"
                         align="right"
@@ -200,20 +199,20 @@ const Services = () => {
                         ]}
                     />
 
-                <Package
-                    index={4}
-                    imgSrc="/botez1-6.jpg"
-                    imgAlt="Pachet 3"
-                    title="Servicii Suplimentare"
-                    align="left"
-                    details={[
-                        '1 videograf: €400',
-                        '1 asistent: €100',
-                        'Dronă: €200',
-                        'Macara cinematografică: €600',
-                        'Ședință video TTD: €400'
-                    ]}
-                />
+                    <Package
+                        index={4}
+                        imgSrc="https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262017/botez1-6.jpg"
+                        imgAlt="Pachet 4"
+                        title="Servicii Suplimentare"
+                        align="left"
+                        details={[
+                            '1 videograf: €400',
+                            '1 asistent: €100',
+                            'Dronă: €200',
+                            'Macara cinematografică: €600',
+                            'Ședință video TTD: €400'
+                        ]}
+                    />
                 </div>
             </Content>
             <CustomFooter />
