@@ -80,47 +80,51 @@ const Homepage = () => {
                     }}
                 />
                 {/* Black overlay */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: isMobile ? '36%' : '100%',
-                        backgroundColor: 'rgba(0,0,0,0.3)',
-                        pointerEvents: 'none',
-                        zIndex: 2,
-                    }}
-                />
-                <svg
-                    viewBox="0 0 2000 100"
-                    preserveAspectRatio="xMidYMid meet"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{
-                        position: 'absolute',
-                        bottom: 83,
-                        left: 0,
-                        width: '100%',
-                        height: isMobile ? '803px' : '80px',
-                        zIndex: 3,
-                    }}
-                >
-                    <line x1="0" y1="50" x2="2000" y2="50" stroke="#d2b6a2" strokeWidth="1.5" />
-                    <circle cx="1015" cy="50" r="32" fill="none" stroke="#d2b6a2" strokeWidth="2.5" />
-                    <circle cx="1047" cy="50" r="32" fill="none" stroke="#d2b6a2" strokeWidth="2.5" style={{ mixBlendMode: 'multiply' }} />
-                    <path d="M980 50 C960 10, 940 90, 920 50" fill="none" stroke="#d2b6a2" strokeWidth="1.6" />
-                    <circle cx="950" cy="50" r="3" fill="#d2b6a2" />
-                    <circle cx="945" cy="40" r="2.5" fill="#d2b6a2" />
-                    <circle cx="940" cy="60" r="2.2" fill="#d2b6a2" />
-                    <path d="M955 48 C953 43, 957 43, 955 48" fill="#d2b6a2" />
-                    <path d="M948 52 C946 47, 950 47, 948 52" fill="#d2b6a2" />
-                    <path d="M1080 50 C1100 10, 1120 90, 1140 50" fill="none" stroke="#d2b6a2" strokeWidth="1.6" />
-                    <circle cx="1110" cy="50" r="3" fill="#d2b6a2" />
-                    <circle cx="1115" cy="40" r="2.5" fill="#d2b6a2" />
-                    <circle cx="1120" cy="60" r="2.2" fill="#d2b6a2" />
-                    <path d="M1105 48 C1103 43, 1107 43, 1105 48" fill="#d2b6a2" />
-                    <path d="M1112 52 C1110 47, 1114 47, 1112 52" fill="#d2b6a2" />
-                </svg>
+                {!isMobile && (
+                    <div
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: isMobile ? '36%' : '100%',
+                            backgroundColor: 'rgba(0,0,0,0.3)',
+                            pointerEvents: 'none',
+                            zIndex: 2,
+                        }}
+                    />
+                )}
+                {!isMobile && (
+                    <svg
+                        viewBox="0 0 2000 100"
+                        preserveAspectRatio="xMidYMid meet"
+                        xmlns="http://www.w3.org/2000/svg"
+                        style={{
+                            position: 'absolute',
+                            bottom: 83,
+                            left: 0,
+                            width: '100%',
+                            height: isMobile ? '803px' : '80px',
+                            zIndex: 3,
+                        }}
+                    >
+                        <line x1="0" y1="50" x2="2000" y2="50" stroke="#d2b6a2" strokeWidth="1.5" />
+                        <circle cx="1015" cy="50" r="32" fill="none" stroke="#d2b6a2" strokeWidth="2.5" />
+                        <circle cx="1047" cy="50" r="32" fill="none" stroke="#d2b6a2" strokeWidth="2.5" style={{ mixBlendMode: 'multiply' }} />
+                        <path d="M980 50 C960 10, 940 90, 920 50" fill="none" stroke="#d2b6a2" strokeWidth="1.6" />
+                        <circle cx="950" cy="50" r="3" fill="#d2b6a2" />
+                        <circle cx="945" cy="40" r="2.5" fill="#d2b6a2" />
+                        <circle cx="940" cy="60" r="2.2" fill="#d2b6a2" />
+                        <path d="M955 48 C953 43, 957 43, 955 48" fill="#d2b6a2" />
+                        <path d="M948 52 C946 47, 950 47, 948 52" fill="#d2b6a2" />
+                        <path d="M1080 50 C1100 10, 1120 90, 1140 50" fill="none" stroke="#d2b6a2" strokeWidth="1.6" />
+                        <circle cx="1110" cy="50" r="3" fill="#d2b6a2" />
+                        <circle cx="1115" cy="40" r="2.5" fill="#d2b6a2" />
+                        <circle cx="1120" cy="60" r="2.2" fill="#d2b6a2" />
+                        <path d="M1105 48 C1103 43, 1107 43, 1105 48" fill="#d2b6a2" />
+                        <path d="M1112 52 C1110 47, 1114 47, 1112 52" fill="#d2b6a2" />
+                    </svg>
+                    )}
             </motion.div>
 
             <Content style={{ padding: '0 48px', background: 'transparent', marginTop: '50px' }}>

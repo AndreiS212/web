@@ -33,7 +33,6 @@ const groupReviews = (array, size = 2) => {
 
 const Reviews = () => {
     const carouselRef = useRef();
-    const grouped = groupReviews(reviews);
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -42,6 +41,8 @@ const Reviews = () => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    const grouped = groupReviews(reviews, isMobile ? 1 : 2);
 
     return (
         <div className="reviews-container">
@@ -62,12 +63,26 @@ const Reviews = () => {
                         <div key={i}>
                             <div className="review-slide">
                                 {pair.map((review, idx) => (
-                                    <Card className="review-card" key={idx}>
-                                        <div className="quote-icon">“</div>
-                                        <p className="review-text">"{review.content}"</p>
-                                        <div className="review-author">– {review.name}</div>
+                                    <Card
+                                        className="review-card"
+                                        key={idx}
+                                        style={{
+                                            width: isMobile ? '90%' : '400px', // smaller on mobile
+                                            margin: '0 auto 20px auto',
+                                            padding: isMobile ? '12px' : '20px', // less padding on mobile
+                                            fontSize: isMobile ? '0.85rem' : '1rem', // smaller text on mobile
+                                        }}
+                                    >
+                                        <div className="quote-icon" style={{ fontSize: isMobile ? '24px' : '32px' }}>“</div>
+                                        <p className="review-text" style={{ fontSize: isMobile ? '0.85rem' : '1rem' }}>
+                                            "{review.content}"
+                                        </p>
+                                        <div className="review-author" style={{ fontSize: isMobile ? '0.8rem' : '1rem' }}>
+                                            – {review.name}
+                                        </div>
                                     </Card>
                                 ))}
+
                             </div>
                         </div>
                     ))}

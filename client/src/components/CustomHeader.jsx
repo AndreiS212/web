@@ -184,16 +184,26 @@ const CustomHeader = () => {
             {/* Responsive CSS */}
             <style>
                 {`
-          @media (max-width: 768px) {
-            .desktop-menu {
-              display: none !important;
-            }
-            .mobile-menu-button {
-              display: inline-block !important;
-            }
-          }
-        `}
+  @media (max-width: 768px) {
+    .desktop-menu {
+      display: none !important;
+    }
+    .mobile-menu-button {
+      display: inline-block !important;
+    }
+    .ant-layout-header {
+      position: sticky !important;
+      top: 0;
+      z-index: 1000;
+      height: 95px; /* <-- increase this to make the header taller */
+      background: rgba(0, 0, 0, 0.8); /* optional for better contrast */
+      backdrop-filter: blur(6px);
+
+    }
+  }
+`}
             </style>
+
         </Header>
     );
 };

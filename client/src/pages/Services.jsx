@@ -65,9 +65,9 @@ const Services = () => {
                         gap: '10px',
                         marginBottom: '5px',
                         color: 'white',
-                        fontSize: isMobile ? '16px' : '18px',
+                        fontSize: isMobile ? '13px' : '15px',
                         fontWeight: 200,
-                        fontFamily: 'Playfair Display SC',
+                        fontFamily: 'Roboto Mono, serif',
                     }}
                 >
                     <p
@@ -79,7 +79,7 @@ const Services = () => {
                             margin: 0,
                         }}
                     >
-                        &amp;
+                        *
                     </p>
                     <span>{item}</span>
                 </li>
@@ -91,7 +91,7 @@ const Services = () => {
         const isEven = index % 2 === 0;
 
         return (
-            <div style={{ maxWidth: '1000px', margin: '40px auto', width: '100%' }}>
+            <div style={{ maxWidth: '1000px', margin: '40px auto', width: '100%', marginTop: isMobile ? '-50px' : '0'  }}>
                 <DecoratedTitle text={title} align={align} />
                 {description && <p style={assistantDescriptionStyle}>{description}</p>}
 

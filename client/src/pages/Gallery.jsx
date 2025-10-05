@@ -58,16 +58,22 @@ const NamesWithDecoration = ({ names, locationText = "- Locatie -", eveniment, i
             <p style={{ fontSize: isMobile ? "10px" : "16px", margin: isMobile ? "1px 0" : "3px 0" }}>
                 {locationText}
             </p>
-            <Button
-                style={{
-                    padding: isMobile ? "4px 10px" : "8px 20px",
-                    fontSize: isMobile ? "0.7rem" : "0.9rem",
-                    borderRadius: isMobile ? "16px" : "25px",
-                    marginTop: "4px",
-                    marginBottom: isMobile ? "2px" : "4px",
-                }}
-                onClick={() => navigate(eveniment)}
-            >
+            <Button style={{
+                padding: isMobile ? '12px 20px' : '12px 28px',
+                background: 'linear-gradient(to right, #d2b6a2, #e6d2c3)',
+                color: '#000',
+                fontSize: isMobile ? '12px' : '1rem',
+                border: 'none',
+                borderRadius: '30px',
+                cursor: 'pointer',
+                fontFamily: 'Playfair Display SC, serif',
+                fontWeight: 400,
+                letterSpacing: '0.5px',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 10px rgba(210, 182, 162, 0.3)',
+                marginBottom: '20px',
+            }}
+                    onClick={() => navigate(eveniment)}>
                 Povestea lor
             </Button>
             <VerticalLine isMobile={isMobile} />
@@ -289,7 +295,6 @@ const Gallery = () => {
                         </Col>
                     )}
                     <Col flex="auto">
-                        {/* Mobile Anchor at top */}
                         {isMobile && (
                             <div style={{ marginBottom: "20px", textAlign: "center" }}>
                                 <Anchor
