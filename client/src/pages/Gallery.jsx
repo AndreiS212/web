@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Layout, Anchor, Splitter } from "antd";
+import {Row, Col, Layout, Anchor, Splitter, Button} from "antd";
 import { motion } from "framer-motion";
 import VideoThumbnailPlayer from "../components/VideoThumbnailPlayer";
 import CustomHeader from "../components/CustomHeader";
@@ -7,6 +7,8 @@ import CustomFooter from "../components/CustomFooter";
 import "./Gallery.css";
 import PhotoGrid from "../components/PhotoGrid";
 import DecoratedTitle from "../components/DecoratedTitle";
+import ScrollToHashElement from "../components/ScrollToHashElement";
+import {useNavigate} from "react-router-dom";
 
 const { Content } = Layout;
 const VerticalLine = () => (
@@ -22,30 +24,52 @@ const VerticalLine = () => (
     </svg>
 );
 
-const NamesWithDecoration = ({ names, locationText = "- Locatie -" }) => (
-    <div
-        style={{
-            textAlign: "center",
-            padding: "20px",
-            fontFamily: "Playfair Display",
-            textTransform: "uppercase",
-            marginRight: "60px"
-        }}
-    >
-        <VerticalLine />
-        <p className="names" style={{ margin: "20px 0 10px" }}>
-            {names}
-        </p>
-        <p style={{ fontSize: "20px" }}>{locationText}</p>
-        <VerticalLine />
-    </div>
-);
+const NamesWithDecoration = ({ names, locationText = "- Locatie -", eveniment }) => {
+    const navigate = useNavigate();
+    return (
+        <div
+            style={{
+                textAlign: "center",
+                padding: "20px",
+                fontFamily: "Playfair Display",
+                textTransform: "uppercase",
+                marginRight: "60px"
+            }}
+        >
+            <VerticalLine/>
+            <p className="names" style={{margin: "20px 0 10px"}}>
+                {names}
+            </p>
+            <p style={{fontSize: "20px"}}>{locationText}</p>
+            <Button style={{
+                padding: '12px 28px',
+                background: 'linear-gradient(to right, #d2b6a2, #e6d2c3)',
+                color: '#000',
+                fontSize: '1rem',
+                border: 'none',
+                borderRadius: '30px',
+                cursor: 'pointer',
+                fontFamily: 'Playfair Display SC, serif',
+                fontWeight: 400,
+                letterSpacing: '0.5px',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 10px rgba(210, 182, 162, 0.3)',
+                marginBottom: '20px'
+            }}
+                    onClick={() => navigate(eveniment)}>
+                Povestea lor
+            </Button>
+            <VerticalLine/>
+        </div>
+    );
+}
 
 const VideoSectionRow = ({
                              videoId,
                              thumbnailSrc,
                              names,
                              locationText,
+                             eveniment,
                              reverse = false,
                              height = 500,
                          }) => {
@@ -78,7 +102,7 @@ const VideoSectionRow = ({
                     alignItems: "center",
                 }}
             >
-                <NamesWithDecoration names={names} locationText={locationText} />
+                <NamesWithDecoration names={names} locationText={locationText} eveniment={eveniment} />
             </div>
         </div>
     );
@@ -95,8 +119,9 @@ const Gallery = () => {
                 {
                     videoId: "1087340348",
                     thumbnailSrc: "/cununie1.jpg",
-                    names: "Claudia & Dragos",
+                    names: "Roxana & Remus",
                     locationText: "Locatie",
+                    eveniment: '/CununieRoxanaRemus'
                 },
             ],
         },
@@ -111,18 +136,56 @@ const Gallery = () => {
                     thumbnailSrc: "/nunta-3-3.jpg",
                     names: "Roxana & Dragos",
                     locationText: "Locatie",
+                    eveniment: '/NuntaRoxanaDragos'
                 },
                 {
                     videoId: "1095230919",
                     thumbnailSrc: "/nunta-1-8.jpg",
                     names: "Andreea & Alin",
                     locationText: "Locatie",
+                    eveniment: '/NuntaAndreeaAlin'
                 },
                 {
                     videoId: "1045290053",
                     thumbnailSrc: null,
                     names: "Gabriela & Andrei",
                     locationText: "Locatie",
+                    eveniment: '/NuntaGabrielaAndrei'
+                },
+                {
+                    videoId: "1103046588",
+                    thumbnailSrc: null,
+                    names: "Nicoleta & Marius",
+                    locationText: "Locatie",
+                    eveniment: '/NuntaNicoletaMarius'
+                },
+                {
+                    videoId: "1103040938",
+                    thumbnailSrc: null,
+                    names: "Cristina & Alin",
+                    locationText: "Locatie",
+                    eveniment: '/NuntaCristinaAlin'
+                },
+                {
+                    videoId: "1048483085",
+                    thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262046/nunta2-3_wu7vq8.jpg',
+                    names: "Claudia & Dragos",
+                    locationText: "Locatie",
+                    eveniment: '/NuntaClaudiaDragos'
+                },
+                {
+                    videoId: "1111732497",
+                    thumbnailSrc: null,
+                    names: "Adnana & Alin",
+                    locationText: "Locatie",
+                    eveniment: '/NuntaAdnanaAlin'
+                },
+                {
+                    videoId: "1116309542",
+                    thumbnailSrc: null,
+                    names: "Teodora & Teodor",
+                    locationText: "Locatie",
+                    eveniment: '/NuntaTeodoraTeodor'
                 },
             ],
         },
@@ -137,6 +200,7 @@ const Gallery = () => {
                     thumbnailSrc: "/lovestory1-9.jpg",
                     names: "Gabriela & Andrei",
                     locationText: "Locatie",
+                    eveniment: '/LoveStoryGabrielaAndrei'
                 },
             ],
         },
@@ -151,6 +215,7 @@ const Gallery = () => {
                     thumbnailSrc: "/botez1-5.jpg",
                     names: "Vlad",
                     locationText: "Locatie",
+                    eveniment: '/BotezVlad'
                 },
             ],
         },
@@ -159,6 +224,7 @@ const Gallery = () => {
     return (
         <Layout style={{ minHeight: "100vh", background: "black" }}>
             <CustomHeader />
+            <ScrollToHashElement />
             <Content style={{ marginTop: "30px" }}>
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -198,13 +264,14 @@ const Gallery = () => {
                         {sections.map(({ id, title, align, reverse, videos }) => (
                             <div id={id} key={id} style={{ marginBottom: "4rem" }}>
                                 <DecoratedTitle text={title} align={align}/>
-                                {videos.map(({ videoId, thumbnailSrc, names, locationText }, idx) => (
+                                {videos.map(({ videoId, thumbnailSrc, names, locationText, eveniment }, idx) => (
                                     <VideoSectionRow
                                         key={videoId + idx}
                                         videoId={videoId}
                                         thumbnailSrc={thumbnailSrc}
                                         names={names}
                                         locationText={locationText}
+                                        eveniment={eveniment}
                                         reverse={reverse}
                                     />
                                 ))}

@@ -21,10 +21,10 @@ const ServicesGallery = () => {
         <Row gutter={[16, 16]}>
             {photos.map((photo, index) => (
                 <Col key={index} xs={24} sm={12} md={6}>
-                    <div
+                    <a
+                        href={photo.link}
                         className="image-container"
-                        onClick={() => handleClick(photo.link)}
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: 'pointer', display: 'block' }}
                     >
                         <img
                             src={photo.src}
@@ -34,7 +34,7 @@ const ServicesGallery = () => {
                         <div className="overlay">
                             {photo.text}
                         </div>
-                    </div>
+                    </a>
                 </Col>
             ))}
         </Row>

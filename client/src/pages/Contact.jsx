@@ -1,9 +1,9 @@
-import React from 'react';
-import { Layout, Form, Input, Button, Space, Row, Col } from 'antd';
+import React, { useState } from 'react';
+import { Layout, Form, Input, Button, Space, Row, Col, message, Spin } from 'antd';
 import { MailOutlined, PhoneOutlined, EnvironmentOutlined } from '@ant-design/icons';
+import { motion } from 'framer-motion';
 import CustomHeader from '../components/CustomHeader';
 import CustomFooter from '../components/CustomFooter';
-import { motion } from 'framer-motion';
 import DecoratedTitle from '../components/DecoratedTitle';
 
 const { Content } = Layout;
@@ -23,10 +23,37 @@ const labelStyle = {
     color: '#d2b6a2',
     fontWeight: '500',
     fontFamily: 'Playfair Display',
-    fontSize: '15px'
+    fontSize: '15px',
 };
 
 const Contact = () => {
+    const [loading, setLoading] = useState(false);
+    const [form] = Form.useForm();
+
+    const handleSubmit = async (values) => {
+        setLoading(true);
+        try {
+            const res = await fetch("/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(values),
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                message.success("Mesajul a fost trimis cu succes!");
+                form.resetFields();
+            } else {
+                message.error("A apărut o eroare la trimiterea mesajului.");
+            }
+        } catch (error) {
+            console.error(error);
+            message.error("Eroare la trimiterea mesajului.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <Layout style={{ minHeight: '100vh', background: 'black' }}>
             <CustomHeader />
@@ -64,49 +91,87 @@ const Contact = () => {
             >
                 <Row gutter={[64, 48]} justify="center" align="top">
                     {/* Contact Form */}
-                    <Col
-                        xs={24}
-                        md={12}
-                        style={{ paddingLeft: 0, marginLeft: '30px' }}
-                    >
-                        <Form layout="vertical" style={{ marginTop: 24 }}>
+                    <Col xs={24} md={12} style={{ paddingLeft: 0, marginLeft: '30px' }}>
+                        <Form
+                            layout="vertical"
+                            style={{ marginTop: 24 }}
+                            form={form}
+                            onFinish={handleSubmit}
+                        >
                             <Form.Item
                                 label={<span style={labelStyle}>Nume</span>}
                                 name="name"
                                 rules={[{ required: true, message: 'Numele nu este valid' }]}
-                                colon={false}
-                                labelAlign="left"
                             >
-                                <Input placeholder="Prenumele și numele tău" style={inputStyle} />
+                                <Input placeholder="Prenumele și numele tău"
+                                       style={{
+                                           ...inputStyle,
+                                           '::placeholder': { color: '#d2b6a2', opacity: 0.7 },
+                                       }} />
                             </Form.Item>
 
                             <Form.Item
                                 label={<span style={labelStyle}>Email</span>}
                                 name="email"
                                 rules={[{ required: true, type: 'email', message: 'Adresa de email nu este validă' }]}
-                                colon={false}
                             >
-                                <Input placeholder="email@exemplu.com" style={inputStyle} />
+                                <Input placeholder="email@exemplu.com"
+                                       style={{
+                                        ...inputStyle,
+                                        '::placeholder': { color: '#d2b6a2', opacity: 0.7 },
+                                }} />
                             </Form.Item>
 
                             <Form.Item
                                 label={<span style={labelStyle}>Telefon</span>}
                                 name="phone"
                                 rules={[{ required: true, message: 'Numărul de telefon nu este valid' }]}
-                                colon={false}
                             >
-                                <Input placeholder="+40..." style={inputStyle} />
+                                <Input
+                                    placeholder="+40..."
+                                    style={{
+                                    ...inputStyle,
+                                    '::placeholder': { color: '#d2b6a2', opacity: 0.7 },
+                                }}
+                                />
                             </Form.Item>
 
-                            <Form.Item label={<span style={labelStyle}>Cum ai aflat de mine?</span>} name="referral" colon={false}>
-                                <Input placeholder="Ex: recomandare, Instagram, Google" style={inputStyle} />
+                            <Form.Item
+                                label={<span style={labelStyle}>Locatia evenimentului</span>}
+                                name="location"
+                                rules={[{ required: true, message: 'Locatia este un camp obligatoriu' }]}
+                            >
+                                <Input placeholder="Ex: Bucuresti"
+                                       style={{
+                                           ...inputStyle,
+                                           '::placeholder': { color: '#d2b6a2', opacity: 0.7 },
+                                       }} />
+                            </Form.Item>
+
+                            <Form.Item
+                                label={<span style={labelStyle}>Cum ai aflat de mine?</span>}
+                                name="referral">
+                                <Input placeholder="Ex: recomandare, Instagram, Google"
+                                       style={{
+                                           ...inputStyle,
+                                           '::placeholder': { color: '#d2b6a2', opacity: 0.7 },
+                                       }} />
+                            </Form.Item>
+
+                            <Form.Item
+                                label={<span style={labelStyle}>Social media handle</span>}
+                                name="socialMedia">
+                                <Input placeholder="Ex: @lucasframes"
+                                       style={{
+                                           ...inputStyle,
+                                           '::placeholder': { color: '#d2b6a2', opacity: 0.7 },
+                                       }} />
                             </Form.Item>
 
                             <Form.Item
                                 label={<span style={labelStyle}>Mesaj</span>}
                                 name="message"
                                 rules={[{ required: true, message: 'Mesajul nu este valid' }]}
-                                colon={false}
                             >
                                 <Input.TextArea
                                     rows={4}
@@ -115,6 +180,7 @@ const Contact = () => {
                                         ...inputStyle,
                                         borderBottom: '1px solid #d2b6a2',
                                         resize: 'vertical',
+                                        '::placeholder': { color: '#d2b6a2', opacity: 0.7 }
                                     }}
                                 />
                             </Form.Item>
@@ -134,16 +200,16 @@ const Contact = () => {
                                         boxShadow: 'none',
                                         fontFamily: "Playfair Display SC"
                                     }}
-                                    ghost={false}
+                                    disabled={loading}
                                 >
-                                    Trimite mesajul
+                                    {loading ? <Spin size="small" /> : "Trimite mesajul"}
                                 </Button>
                             </Form.Item>
                         </Form>
                     </Col>
 
                     {/* Contact Info */}
-                    <Col xs={24} md={10} style={{ paddingRight: 0, marginRight: '30px', marginTop: "100px"  }}>
+                    <Col xs={24} md={10} style={{ paddingRight: 0, marginRight: '30px', marginTop: "100px" }}>
                         <div style={{ textAlign: 'center', paddingRight: 24 }}>
                             <DecoratedTitle text="Detalii de contact" align="center" />
                         </div>

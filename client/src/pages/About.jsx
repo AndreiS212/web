@@ -4,10 +4,12 @@ import CustomHeader from '../components/CustomHeader';
 import CustomFooter from '../components/CustomFooter';
 import { motion } from 'framer-motion';
 import DecoratedTitle from "../components/DecoratedTitle";
+import {useNavigate} from "react-router-dom";
 
 const { Content } = Layout;
 
 const About = () => {
+    const navigate = useNavigate();
     return (
         <Layout style={{ minHeight: '100vh', background: '#121212', color: '#f5f0e6' }}>
             <CustomHeader />
@@ -75,7 +77,9 @@ const About = () => {
                             Hai să creăm împreună amintiri ce vor dăinui o viață întreagă.
                         </p>
                         <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                            <button style={{
+                            <button
+                                onClick={() => navigate('/contact')}
+                                style={{
                                 padding: '10px 20px',
                                 backgroundColor: '#d2b6a2',
                                 color: '#000000',
@@ -102,7 +106,7 @@ const About = () => {
                         }}
                     >
                         <img
-                            src='/luca.jpeg'
+                            src='https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262043/luca_e9gaha.jpg'
                             alt="Profil"
                             style={{ width: '100%', height: '100%', display: 'block' }}
                             loading="lazy"

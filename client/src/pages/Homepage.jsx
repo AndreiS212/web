@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useMemo, useRef, useState} from 'react';
 import { Layout, theme, Carousel } from 'antd';
 import './Homepage.css';
 import { motion } from 'framer-motion';
@@ -47,7 +47,7 @@ const Homepage = () => {
             animation: 'fadeIn 2s ease-out',
         },
         heading: {
-            fontSize: '2.4rem',
+            fontSize: '1.5rem',
             textTransform: 'uppercase',
             marginBottom: '15px',
             fontFamily: 'Playfair Display SC, serif',
@@ -118,6 +118,24 @@ const Homepage = () => {
         'nunta2-12.jpg'
     ];
 
+
+    const videoItems = [
+        '1097881705',
+        '1103040938',
+        '1103046588',
+        '1095230919',
+        '1088465244',
+        '1087340348',
+        '1048483085',
+        '1045290053',
+        '1045287269'
+    ]
+
+    const randomVideoId = useMemo(() => {
+        const index = Math.floor(Math.random() * videoItems.length);
+        return videoItems[index];
+    }, []);
+
     return (
         <Layout style={{ minHeight: '100vh', background: 'black' }}>
             <CustomHeader />
@@ -126,11 +144,10 @@ const Homepage = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8 }}
-                style={{ position: 'relative' }}
                 ref={ref}
             >
                 <iframe
-                    src="https://player.vimeo.com/video/1097881705?controls=0&title=0&byline=0&portrait=0&autopause=0&autoplay=1"
+                    src={`https://player.vimeo.com/video/${randomVideoId}?controls=0&title=0&byline=0&portrait=0&autopause=0&autoplay=1&&muted=1`}
                     height="600"
                     frameBorder="0"
                     allow="autoplay; fullscreen"
@@ -143,13 +160,26 @@ const Homepage = () => {
                         marginTop: '-150px',
                     }}
                 />
+                {/* Black overlay */}
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                        pointerEvents: 'none',
+                        zIndex: 2,
+                    }}
+                />
                 <svg
                     viewBox="0 0 2000 100"
                     preserveAspectRatio="xMidYMid meet"
                     xmlns="http://www.w3.org/2000/svg"
                     style={{
                         position: 'absolute',
-                        bottom: -25,
+                        bottom: 30,
                         left: 0,
                         width: '100%',
                         height: '80px',
@@ -223,7 +253,7 @@ const Homepage = () => {
                     style={{
                         position: 'absolute',
                         top: '50%',
-                        left: '10px',  // close to left edge
+                        left: '10px',
                         transform: 'translateY(-50%)',
                         fontSize: '28px',
                         color: 'white',
@@ -242,7 +272,7 @@ const Homepage = () => {
                     style={{
                         position: 'absolute',
                         top: '50%',
-                        right: '10px',  // close to right edge
+                        right: '10px',
                         transform: 'translateY(-50%)',
                         fontSize: '28px',
                         color: 'white',
@@ -292,18 +322,18 @@ const Homepage = () => {
                     >
                         {/* Video 1 */}
                         <div style={{ maxWidth: '600px', width: '100%', textAlign: 'center', height: '400px' }}>
-                            <VideoThumbnailPlayer videoId="1097881705" thumbnailSrc="/lovestory1-9.jpg" />
+                            <VideoThumbnailPlayer videoId="1116309542" thumbnailSrc="" />
                             <p style={{ marginTop: '10px', fontSize: '18px', fontFamily: 'Playfair Display SC', color: "#d2b6a2" }}>
-                                Gabriela & Andrei
+                                Teodora & Teodor
                             </p>
-                            <p style={{ fontSize: '15px', fontFamily: 'Playfair Display SC' }}>Love Story</p>
+                            <p style={{ fontSize: '15px', fontFamily: 'Playfair Display SC' }}>Nuntă</p>
                         </div>
 
                         {/* Video 2 */}
                         <div style={{ maxWidth: '600px', width: '100%', textAlign: 'center', height: '400px' }}>
-                            <VideoThumbnailPlayer videoId="1048483085" thumbnailSrc="/nunta2-4.jpg" />
+                            <VideoThumbnailPlayer videoId="1111732497" thumbnailSrc="" />
                             <p style={{ marginTop: '10px', fontSize: '18px', fontFamily: 'Playfair Display SC', color: "#d2b6a2" }}>
-                                Claudia & Dragoș
+                                Adnana & Alin
                             </p>
                             <p style={{ fontSize: '15px', fontFamily: 'Playfair Display SC' }}>Nuntă</p>
                         </div>
