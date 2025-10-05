@@ -3,97 +3,86 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const session = require("express-session");
 const passport = require("passport");
+const nodemailer = require("nodemailer");
 const videoRoutes = require("./routes/videoRoutes");
 const authRoutes = require("./routes/authRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const connectDB = require("./config/db");
 const Video = require("./models/Video");
 const Review = require("./models/Review");
-const nodemailer = require("nodemailer");
+const path = require("path");
 
 dotenv.config();
 connectDB();
 
 const app = express();
 app.set("view engine", "ejs");
+
+// ✅ Parse form + JSON requests
 app.use(express.urlencoded({ extended: true }));
-const path = require("path");
+app.use(express.json());
+
+// Static build
 app.use(express.static(path.join(__dirname, "client/build")));
 
+// Sessions & Passport
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Set up nodemailer transport
+// ✅ Nodemailer config
 const transport = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
-  secure: false, // or 'STARTTLS'
+  secure: false,
   auth: {
-    user: 'your-email@gmail.com',
-    pass: 'your-password'
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 
-// Set up email template
-const emailTemplate = (data) => {
-  return `
-    <h2>Contact Form Submission</h2>
-    <p>Name: ${data.name}</p>
-    <p>Email: ${data.email}</p>
-    <p>Phone: ${data.phone}</p>
-    <p>Booking Date: ${data.bookingDate}</p>
-    <p>Notes: ${data.notes}</p>
+// ✅ Contact route (React form target)
+app.post('/contact', async (req, res) => {
+  const { name, email, phone, referral, message } = req.body;
+
+  const html = `
+    <h2>Mesaj nou de pe site</h2>
+    <p><b>Nume:</b> ${name}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Telefon:</b> ${phone}</p>
+    <p><b>Cum a aflat:</b> ${referral || "Nespecificat"}</p>
+    <p><b>Mesaj:</b></p>
+    <p>${message}</p>
   `;
-};
 
-// Handle form submission
-app.post('/contact', (req, res) => {
-  const data = req.body;
-  const email = emailTemplate(data);
-
-  // Send email using nodemailer
-  transport.sendMail({
-    from: 'your-email@gmail.com',
-    to: 'owner-email@example.com',
-    subject: 'Contact Form Submission',
-    html: email
-  }, (err, info) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send('Error sending email');
-    } else {
-      console.log('Email sent successfully');
-      res.send('Thank you for contacting us!');
-    }
-  });
-});
-
-// Home route - Fetch both videos and reviews from the database
-app.get("*", async (req, res) => {
-  console.log(" Home route hit");
   try {
-    const videos = await Video.find() || [];
-    const reviews = await Review.find() || [];
+    await transport.sendMail({
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_RECEIVER || process.env.EMAIL_USER,
+      subject: `Mesaj nou de la ${name}`,
+      html
+    });
 
-    console.log("Reviews: ", reviews);
-
-    // res.render("index", { homepage, videos, reviews });
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+    res.status(200).json({ success: true, message: "Mesaj trimis cu succes!" });
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Server error");
+    console.error("Eroare trimitere email:", err);
+    res.status(500).json({ success: false, message: "Eroare la trimiterea mesajului." });
   }
 });
 
+// Other routes
 app.use("/", reviewRoutes);
 app.use("/", videoRoutes);
 app.use("/", authRoutes);
 
+// React app fallback
+app.get("*", async (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
+
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
