@@ -40,7 +40,7 @@ const DecoratedTitle = ({ text, align = 'center' }) => {
             }}>
                 <div style={smallLineStyle} />
                 <span style={{
-                    fontSize: '1.8rem',
+                    fontSize: isMobile ? '1rem' : '1.8rem',
                     fontFamily: 'Playfair Display SC, serif',
                     fontWeight: 400,
                     textTransform: 'uppercase',
@@ -61,7 +61,7 @@ const DecoratedTitle = ({ text, align = 'center' }) => {
             }}>
                 <div style={{ flex: 1, height: '1px', ...lineStyle }} />
                 <span style={{
-                    fontSize: '1.8rem',
+                    fontSize: isMobile ? '1rem' : '1.8rem',
                     fontFamily: 'Playfair Display SC, serif',
                     fontWeight: 400,
                     textTransform: 'uppercase',
@@ -83,7 +83,7 @@ const DecoratedTitle = ({ text, align = 'center' }) => {
             }}>
                 <div style={fixedLineStyle} />
                 <span style={{
-                    fontSize: '1.8rem',
+                    fontSize: isMobile ? '1rem' : '1.8rem',
                     fontFamily: 'Playfair Display SC, serif',
                     fontWeight: 400,
                     textTransform: 'uppercase',

@@ -10,6 +10,7 @@ import { useInView } from 'react-intersection-observer';
 import VideoThumbnailPlayer from "../components/VideoThumbnailPlayer";
 import DecoratedTitle from "../components/DecoratedTitle";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import CTAButton from "../components/CTAButton";
 
 const { Content } = Layout;
 
@@ -18,12 +19,23 @@ const Homepage = () => {
     const [isHovered, setIsHovered] = useState(false);
     const carouselRef = useRef();
     const [isMobile, setIsMobile] = useState(false);
+    const [isTablet, setIsTablet] = useState(false);
+
+    const iframeRef = useRef(null);
+    const [videoHeight, setVideoHeight] = useState(0);
+    const videoWrapperRef = useRef(null);
 
     useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth <= 768);
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
+        if (!videoWrapperRef.current) return;
+
+        const observer = new ResizeObserver(entries => {
+            const rect = entries[0].contentRect;
+            setVideoHeight(rect.height);
+        });
+
+        observer.observe(videoWrapperRef.current);
+
+        return () => observer.disconnect();
     }, []);
 
     const carouselItems = [
@@ -65,69 +77,45 @@ const Homepage = () => {
                 transition={{ duration: 0.8 }}
                 ref={ref}
             >
-                <iframe
-                    src={`https://player.vimeo.com/video/${randomVideoId}?controls=0&title=0&byline=0&portrait=0&autopause=0&autoplay=1&&muted=1`}
-                    height="600"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen"
-                    allowFullScreen
-                    style={{
-                        width: '99vw',
-                        height: '670px',
-                        border: 'none',
-                        objectFit: 'cover',
-                        marginTop: isMobile ? '-220px' : '-150px',
-                    }}
-                />
-                {/* Black overlay */}
-                {!isMobile && (
-                    <div
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: isMobile ? '36%' : '100%',
-                            backgroundColor: 'rgba(0,0,0,0.3)',
-                            pointerEvents: 'none',
-                            zIndex: 2,
-                        }}
-                    />
-                )}
-                {!isMobile && (
-                    <svg
-                        viewBox="0 0 2000 100"
-                        preserveAspectRatio="xMidYMid meet"
-                        xmlns="http://www.w3.org/2000/svg"
-                        style={{
-                            position: 'absolute',
-                            bottom: 83,
-                            left: 0,
-                            width: '100%',
-                            height: isMobile ? '803px' : '80px',
-                            zIndex: 3,
-                        }}
-                    >
-                        <line x1="0" y1="50" x2="2000" y2="50" stroke="#d2b6a2" strokeWidth="1.5" />
-                        <circle cx="1015" cy="50" r="32" fill="none" stroke="#d2b6a2" strokeWidth="2.5" />
-                        <circle cx="1047" cy="50" r="32" fill="none" stroke="#d2b6a2" strokeWidth="2.5" style={{ mixBlendMode: 'multiply' }} />
-                        <path d="M980 50 C960 10, 940 90, 920 50" fill="none" stroke="#d2b6a2" strokeWidth="1.6" />
-                        <circle cx="950" cy="50" r="3" fill="#d2b6a2" />
-                        <circle cx="945" cy="40" r="2.5" fill="#d2b6a2" />
-                        <circle cx="940" cy="60" r="2.2" fill="#d2b6a2" />
-                        <path d="M955 48 C953 43, 957 43, 955 48" fill="#d2b6a2" />
-                        <path d="M948 52 C946 47, 950 47, 948 52" fill="#d2b6a2" />
-                        <path d="M1080 50 C1100 10, 1120 90, 1140 50" fill="none" stroke="#d2b6a2" strokeWidth="1.6" />
-                        <circle cx="1110" cy="50" r="3" fill="#d2b6a2" />
-                        <circle cx="1115" cy="40" r="2.5" fill="#d2b6a2" />
-                        <circle cx="1120" cy="60" r="2.2" fill="#d2b6a2" />
-                        <path d="M1105 48 C1103 43, 1107 43, 1105 48" fill="#d2b6a2" />
-                        <path d="M1112 52 C1110 47, 1114 47, 1112 52" fill="#d2b6a2" />
-                    </svg>
+                <div className="hero-container" style={{ height: videoHeight }}>
+                    <div className="hero-video-wrapper" ref={videoWrapperRef}>
+                        <iframe ref={iframeRef}
+                            className="hero-iframe"
+                            src={`https://player.vimeo.com/video/${randomVideoId}?controls=0&title=0&byline=0&portrait=0&autopause=0&autoplay=1&muted=1&dnt=1`}
+                            allow="autoplay; fullscreen"
+                            allowFullScreen
+                        />
+                    </div>
+
+                    {!isMobile && <div className="hero-overlay" />}
+                    {!isMobile && (
+                        <svg
+                            className="hero-svg"
+                            viewBox="0 0 2000 100"
+                            preserveAspectRatio="xMidYMid meet"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <line x1="0" y1="50" x2="2000" y2="50" stroke="#d2b6a2" strokeWidth="1.5" />
+                            <circle cx="1015" cy="50" r="32" fill="none" stroke="#d2b6a2" strokeWidth="2.5" />
+                            <circle cx="1047" cy="50" r="32" fill="none" stroke="#d2b6a2" strokeWidth="2.5" style={{ mixBlendMode: 'multiply' }} />
+                            <path d="M980 50 C960 10, 940 90, 920 50" fill="none" stroke="#d2b6a2" strokeWidth="1.6" />
+                            <circle cx="950" cy="50" r="3" fill="#d2b6a2" />
+                            <circle cx="945" cy="40" r="2.5" fill="#d2b6a2" />
+                            <circle cx="940" cy="60" r="2.2" fill="#d2b6a2" />
+                            <path d="M955 48 C953 43, 957 43, 955 48" fill="#d2b6a2" />
+                            <path d="M948 52 C946 47, 950 47, 948 52" fill="#d2b6a2" />
+                            <path d="M1080 50 C1100 10, 1120 90, 1140 50" fill="none" stroke="#d2b6a2" strokeWidth="1.6" />
+                            <circle cx="1110" cy="50" r="3" fill="#d2b6a2" />
+                            <circle cx="1115" cy="40" r="2.5" fill="#d2b6a2" />
+                            <circle cx="1120" cy="60" r="2.2" fill="#d2b6a2" />
+                            <path d="M1105 48 C1103 43, 1107 43, 1105 48" fill="#d2b6a2" />
+                            <path d="M1112 52 C1110 47, 1114 47, 1112 52" fill="#d2b6a2" />
+                        </svg>
                     )}
+                </div>
             </motion.div>
 
-            <Content style={{ padding: '0 48px', background: 'transparent', marginTop: '50px' }}>
+            <Content className="hero-text">
                 <div style={{
                     zIndex: 3,
                     display: 'flex',
@@ -135,142 +123,117 @@ const Homepage = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: '#d2b6a2',
-                    padding: '20px',
-                    textShadow: '0 4px 6px rgba(0, 0, 0, 0.5)',
-                    animation: 'fadeIn 2s ease-out'
+                    padding: '2vh 2vw',
+                    textShadow: '0 0.4vh 0.6vh rgba(0, 0, 0, 0.5)',
+                    animation: 'fadeIn 2s ease-out',
+                    marginTop: isMobile ? '3vh' : isTablet ? '5vh' : '-8vh', // responsive
                 }}>
                     <h1 style={{
-                        fontSize: '1.5rem',
+                        fontSize: 'clamp(1.0rem, 2vw, 2rem)', // scales with screen
                         textTransform: 'uppercase',
-                        marginBottom: '15px',
-                        marginTop: isMobile ? '-300px' : '0',
+                        marginBottom: '2vh', // responsive
+                        marginTop: '-10vh',
                         fontFamily: 'Playfair Display SC, serif',
                         fontWeight: 700,
                         color: '#d2b6a2',
                         textAlign: 'center'
                     }}>Povestea voastră prin obiectivul meu</h1>
+
                     <p style={{
-                        fontSize: '1.15rem',
-                        lineHeight: '1.7',
-                        maxWidth: '800px',
+                        fontSize: 'clamp(0.8rem, 1.2vw, 1.15rem)',
+                        lineHeight: 1.7,
+                        maxWidth: '90%',
                         fontFamily: 'Segoe UI, sans-serif',
                         textAlign: 'center',
-                        color: '#e0d8d2',
-                        width: isMobile ? '400px' : '800px'
+                        color: '#e0d8d2'
                     }}>
                         O fotografie nu este doar o imagine, ci o emoție oprită în timp.
                         Ne dorim să simțiți iar și iar acea bucurie, emoție și căldură de la nunta voastră,
                         prin fiecare fotografie și film realizat cu pasiune și atenție la detalii.
                     </p>
+                    <CTAButton />
                 </div>
 
                 {/* Carousel */}
                 <DecoratedTitle text="Galerie" align="left" />
-                <div style={{ position: 'relative', width: '100%', marginBottom: '3rem' }}>
+                <div className="carousel-wrapper">
                     <Carousel
                         ref={carouselRef}
                         autoplay
                         dots
-                        style={{
-                            width: isMobile ? '400px' : '1430px',
-                            marginLeft: isMobile ? '-40px' : '0'
-                        }}
                     >
                         {carouselItems.map((img, index) => (
                             <div key={index}>
                                 <img
                                     src={img}
                                     alt={`carousel-item-${index}`}
-                                    style={{
-                                        width: isMobile ? '150%' : '100%',
-                                        height: isMobile ? '200%' : 'auto',
-                                        maxHeight: '80vh',
-                                        objectFit: 'cover',
-                                    }}
+                                    className="carousel-image"
                                 />
                             </div>
                         ))}
                     </Carousel>
                     <LeftOutlined
+                        className="carousel-arrow left"
                         onClick={() => carouselRef.current.prev()}
-                        style={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '10px',
-                            fontSize: '24px',
-                            color: 'white',
-                            cursor: 'pointer',
-                            marginLeft: isMobile ? '-40px' : '0',
-                            transform: 'translateY(-50%)',
-                        }}
                     />
                     <RightOutlined
+                        className="carousel-arrow right"
                         onClick={() => carouselRef.current.next()}
-                        style={{
-                            position: 'absolute',
-                            top: '50%',
-                            right: '10px',
-                            fontSize: '24px',
-                            color: 'white',
-                            cursor: 'pointer',
-                            marginRight: isMobile ? '-40px' : '0',
-                            transform: 'translateY(-50%)',
-                        }}
                     />
                 </div>
 
                 {/* Services */}
-                <DecoratedTitle text="Evenimente" align='right' />
-                <ServicesGallery />
+                <div className="services-section">
+                    <DecoratedTitle text="Evenimente" align='right' />
+                    <div className="services">
+                        <ServicesGallery />
+                    </div>
+                </div>
 
                 {/* Stories */}
-                <DecoratedTitle text="Povești recente" align="left" />
-                <div style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '2rem',
-                    justifyContent: 'center',
-                    marginTop: isMobile ? '100px' : '0px'
-                }}>
-                    {[
-                        { videoId: "1116309542", names: "Teodora & Teodor", type: "Nuntă" },
-                        { videoId: "1111732497", names: "Adnana & Alin", type: "Nuntă" }
-                    ].map((story, idx) => {
-                        return (
-                            <div
-                                key={idx}
-                                style={{
-                                    width: isMobile ? '600px' : '600px',
-                                    maxWidth: '600px',
-                                    textAlign: 'center',
-                                    height: isMobile ? '150px' : '400px',
-                                    marginBottom: isMobile ? '10rem' : '0',
-                                }}
-                            >
-                                <VideoThumbnailPlayer videoId={story.videoId} thumbnailSrc="" />
-                                <p style={{
-                                    marginTop: isMobile ? '6px' : '10px',
-                                    fontSize: isMobile ? '16px' : '18px',
-                                    fontFamily: 'Playfair Display SC',
-                                    color: "#d2b6a2"
-                                }}>
-                                    {story.names}
-                                </p>
-                                <p style={{
-                                    fontSize: isMobile ? '13px' : '15px',
-                                    fontFamily: 'Playfair Display SC'
-                                }}>
-                                    {story.type}
-                                </p>
-                            </div>
-                        );
-                    })}
+                <div className="stories-section">
+                    <DecoratedTitle text="Povești recente" align="left" />
+                    <div className="stories-container">
+                        {[
+                            { videoId: "1116309542", names: "Teodora & Teodor", type: "Nuntă" },
+                            { videoId: "1111732497", names: "Adnana & Alin", type: "Nuntă" }
+                        ].map((story, idx) => {
+                            return (
+                                <div
+                                    key={idx}
+                                    style={{
+                                        width: '100%',
+                                        maxWidth: '600px',
+                                        textAlign: 'center',
+                                        height: isMobile ? '150px' : '400px',
+                                        marginBottom: isMobile ? '2rem' : '0',
+                                    }}
+                                >
+                                    <VideoThumbnailPlayer videoId={story.videoId} thumbnailSrc="" />
+                                    <p style={{
+                                        marginTop: isMobile ? '6px' : '10px',
+                                        fontSize: isMobile ? '16px' : '18px',
+                                        fontFamily: 'Playfair Display SC',
+                                        color: "#d2b6a2"
+                                    }}>
+                                        {story.names}
+                                    </p>
+                                    <p style={{
+                                        fontSize: isMobile ? '13px' : '15px',
+                                        fontFamily: 'Playfair Display SC'
+                                    }}>
+                                        {story.type}
+                                    </p>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
 
 
-                {/* Reviews */}
-                <DecoratedTitle text="Recenzii" align="right" />
-                <Reviews />
+            {/*    /!* Reviews *!/*/}
+            {/*    <DecoratedTitle text="Recenzii" align="right" />*/}
+            {/*    <Reviews />*/}
             </Content>
 
             <CustomFooter />

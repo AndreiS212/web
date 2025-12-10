@@ -18,6 +18,7 @@ import NuntaNicoletaMarius from "./pages/cupluri/NuntaNicoletaMarius";
 import NuntaRoxanaDragos from "./pages/cupluri/NuntaRoxanaDragos";
 import NuntaAdnanaAlin from "./pages/cupluri/NuntaAdnanaAlin";
 import NuntaTeodoraTeodor from "./pages/cupluri/NuntaTeodoraTeodor";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/NuntaRoxanaDragos" element={<NuntaRoxanaDragos />} />
           <Route path="/NuntaAdnanaAlin" element={<NuntaAdnanaAlin />} />
           <Route path="/NuntaTeodoraTeodor" element={<NuntaTeodoraTeodor />} />
+          <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
         </Routes>
       </Router>
   );

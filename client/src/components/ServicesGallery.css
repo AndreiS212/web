@@ -5,8 +5,8 @@
 }
 
 .image-container img {
-    width: 100%;
-    height: 600px;
+    /*width: 100%;*/
+    /*height: 600px;*/
     object-fit: cover;
     display: block;
     margin-top: 200px;
@@ -31,6 +31,27 @@
     text-transform: uppercase;
 }
 
+/* Medium screens – shift left slightly */
+@media (max-width: 1200px) {
+    .image-container img {
+        object-position: 30% center; /* push image left */
+    }
+}
+
+/* Tablets – shift more left */
+@media (max-width: 992px) {
+    .image-container img {
+        object-position: 60% center;
+    }
+}
+
+/* Mobile – fully left */
+@media (max-width: 768px) {
+    .image-container img {
+        object-position: center;
+    }
+}
+
 .image-container:hover .overlay {
     opacity: 1;
 }
@@ -38,8 +59,10 @@
 /* ✅ MOBILE STYLING */
 @media (max-width: 768px) {
     .image-container {
-        margin-top: -170px;
-        margin-bottom: -10px;
+        margin-top: -20vh;
+        margin-left: auto;     /* center horizontally */
+        margin-right: auto;    /* center horizontally */
+        display: block;        /* required for auto margins */
     }
 
     .overlay {
@@ -52,5 +75,13 @@
     .image-container .overlay {
         opacity: 1; /* still works on mobile (for tablets/touch hover) */
         margin-top: 200px;
+    }
+}
+
+@media (min-width: 768px) {
+    .image-container {
+        height: 800px;
+        width: 100%; /* MAKE IT FLUID */
+        max-width: 100%; /* Prevent overflow */
     }
 }

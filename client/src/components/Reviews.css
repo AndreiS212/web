@@ -30,11 +30,11 @@
     margin: 0;
 }
 
-.carousel-wrapper {
+.reviews-carousel-wrapper {
     position: relative;
 }
 
-.carousel-arrow {
+.reviews-carousel-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -48,16 +48,16 @@
     transition: all 0.3s ease;
 }
 
-.carousel-arrow:hover {
+.reviews-carousel-arrow:hover {
     background: #d2b6a2;
     color: #1a1a1a;
 }
 
-.carousel-arrow.left {
+.reviews-carousel-arrow.left {
     left: -40px;
 }
 
-.carousel-arrow.right {
+.reviews-carousel-arrow.right {
     right: -40px;
 }
 

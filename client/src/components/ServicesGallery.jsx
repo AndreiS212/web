@@ -31,9 +31,9 @@ const ServicesGallery = () => {
                         style={{
                             cursor: 'pointer',
                             display: 'block',
-                            height: isMobile ? '500px' : '800px',
-                            width: isMobile ? '370px' : '340px',
-                            marginLeft: isMobile ? '-30px' : '0'
+                            // height: isMobile ? '500px' : '800px',
+                            // width: isMobile ? '370px' : '340px',
+                            // marginLeft: isMobile ? '-30px' : '0'
                         }}
                     >
                         <img
@@ -41,8 +41,9 @@ const ServicesGallery = () => {
                             alt={`panel-${index}`}
                             className="gallery-image"
                             style={{
-                                width: isMobile ? '400px' : '100%',
+                                width: '100%',
                                 height: isMobile ? '300px' : '80%',
+                                objectFit: 'cover',
                             }}
                         />
                         <div

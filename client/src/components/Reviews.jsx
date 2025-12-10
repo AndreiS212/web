@@ -46,9 +46,9 @@ const Reviews = () => {
 
     return (
         <div className="reviews-container">
-            <div className="carousel-wrapper">
+            <div className="reviews-carousel-wrapper">
                 <LeftOutlined
-                    className="carousel-arrow left"
+                    className="reviews-carousel-arrow left"
                     onClick={() => carouselRef.current?.prev()}
                     style={{marginTop: isMobile ? '-40px' : '0px'}}
                 />
@@ -88,7 +88,7 @@ const Reviews = () => {
                     ))}
                 </Carousel>
                 <RightOutlined
-                    className="carousel-arrow right"
+                    className="reviews-carousel-arrow right"
                     onClick={() => carouselRef.current?.next()}
                     style={{marginTop: isMobile ? '-40px' : '0px'}}
                 />

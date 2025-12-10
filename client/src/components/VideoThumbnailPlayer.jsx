@@ -26,22 +26,50 @@ const VideoThumbnailPlayer = ({ videoId, style, overlayText, thumbnailSrc, autoP
   }, [videoId]);
 
   // Set explicit container dimensions (optional, adjust as needed)
+  // const containerStyle = {
+  //   position: 'relative',
+  //   width: '100%',
+  //   // height: isMobile? '150%' : '70%',
+  //   // maxHeight: '500px',
+  //   backgroundColor: 'transparent',
+  //   display: 'flex',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   // marginTop: isMobile ? '-50px' : '72px',
+  //   ...style,
+  // };
+
   const containerStyle = {
     position: 'relative',
     width: '100%',
-    height: isMobile? '150%' : '70%',
+    height: isMobile ? '70%' : '70%',
     maxHeight: '500px',
     backgroundColor: 'transparent',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: isMobile ? '-50px' : '72px',
+    marginTop: isMobile ? '0' : '72px',
     ...style,
   };
 
+
+
+  // const thumbnailStyle = {
+  //   backgroundImage: `url(${thumbnail})`,
+  //   backgroundSize: 'cover', // Ensures the image fills the container
+  //   backgroundPosition: 'center',
+  //   backgroundRepeat: 'no-repeat',
+  //   width: '100%',
+  //   height: '100%',
+  //   cursor: 'pointer',
+  //   display: 'flex',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // };
+
   const thumbnailStyle = {
     backgroundImage: `url(${thumbnail})`,
-    backgroundSize: 'cover', // Ensures the image fills the container
+    backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     width: '100%',
@@ -51,6 +79,7 @@ const VideoThumbnailPlayer = ({ videoId, style, overlayText, thumbnailSrc, autoP
     justifyContent: 'center',
     alignItems: 'center',
   };
+
 
   return (
       <div style={containerStyle}>
@@ -93,13 +122,19 @@ const VideoThumbnailPlayer = ({ videoId, style, overlayText, thumbnailSrc, autoP
             </div>
         ) : (
             <iframe
-                src={`https://player.vimeo.com/video/${videoId}?autoplay=1`}
-                width="100%"
-                height="100%"
+                src={`https://player.vimeo.com/video/${videoId}?autoplay=1&dnt=1`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                }}
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen
-            ></iframe>
+            />
+
         )}
       </div>
   );

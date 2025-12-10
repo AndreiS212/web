@@ -228,10 +228,10 @@ const Contact = () => {
                         >
                             {[{
                                 icon: <MailOutlined style={{ fontSize: 20 }} />,
-                                text: 'contact@videodenunta.ro',
+                                text: 'contact@lucasframes.ro',
                             }, {
                                 icon: <PhoneOutlined style={{ fontSize: 20 }} />,
-                                text: '+40 712 345 678',
+                                text: '0748948776',
                             }, {
                                 icon: <EnvironmentOutlined style={{ fontSize: 20 }} />,
                                 text: 'București, România',
