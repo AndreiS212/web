@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const VideoThumbnailPlayer = ({ videoId, style, overlayText, thumbnailSrc, autoPlay = false }) => {
+const VideoThumbnailPlayer = ({ videoId, style, overlayText, thumbnailSrc, autoPlay = false}) => {
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [thumbnail, setThumbnail] = useState('');
   const [isMobile, setIsMobile] = useState(false);
@@ -49,6 +49,7 @@ const VideoThumbnailPlayer = ({ videoId, style, overlayText, thumbnailSrc, autoP
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: isMobile ? '0' : '72px',
+    aspectRatio: isMobile ? '1/1' : '16/9',
     ...style,
   };
 

@@ -78,16 +78,16 @@ const Cuplu = ({
                         <DecoratedTitle
                             text={"Povestea " + getTitle()}
                             align="right"/>
-                        <div style={{
-                            width: '100%',
-                            maxWidth: '1200px',
-                            margin: '0 auto',
-                            aspectRatio: isMobile ? '1/1' : '16 / 9',
-                            overflow: 'hidden',
-                            boxShadow: '0 8px 20px rgba(0,0,0,0.4)'
-                        }}>
+                        {/*<div style={{*/}
+                        {/*    width: '100%',*/}
+                        {/*    maxWidth: '1200px',*/}
+                        {/*    margin: '0 auto',*/}
+                        {/*    aspectRatio: isMobile ? '1/1' : '16 / 9',*/}
+                        {/*    overflow: 'hidden',*/}
+                        {/*    boxShadow: '0 8px 20px rgba(0,0,0,0.4)'*/}
+                        {/*}}>*/}
                             <VideoThumbnailPlayer videoId={storyVideoId} thumbnailSrc={storyThumbnail} />
-                        </div>
+                        {/*</div>*/}
                     </div>
                 )}
 
@@ -95,16 +95,16 @@ const Cuplu = ({
                     /* Full-width Video */
                     <div style={{ width: '100%', marginBottom: '60px' }}>
                         <DecoratedTitle text="Filmul Complet" align="left"/>
-                        <div style={{
-                            width: '100%',
-                            maxWidth: '1200px',
-                            margin: '0 auto',
-                            aspectRatio: isMobile ? '1/1' : '16 / 9',
-                            overflow: 'hidden',
-                            boxShadow: '0 8px 20px rgba(0,0,0,0.4)'
-                        }}>
+                        {/*<div style={{*/}
+                        {/*    width: '100%',*/}
+                        {/*    maxWidth: '1200px',*/}
+                        {/*    margin: '0 auto',*/}
+                        {/*    aspectRatio: isMobile ? '1/1' : '16 / 9',*/}
+                        {/*    overflow: 'hidden',*/}
+                        {/*    boxShadow: '0 8px 20px rgba(0,0,0,0.4)'*/}
+                        {/*}}>*/}
                             <VideoThumbnailPlayer videoId={fullVideoId} thumbnailSrc={fullThumbnail} />
-                        </div>
+                        {/*</div>*/}
                     </div>
                 )}
 
