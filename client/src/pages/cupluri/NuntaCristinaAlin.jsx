@@ -7,10 +7,11 @@ const NuntaCristinaAlin = () => {
     ]
     return (
         <Cuplu name={"Cristina & Alin"}
-               header={''}
-               videoId={'1103040938'}
-               photos={photos}
-               thumbnail={''}
+               header={`https://vumbnail.com/${1139860081}.jpg`}
+               storyVideoId={'1139862757'}
+               storyThumbnail={`https://vumbnail.com/${1139862757}.jpg`}
+               fullVideoId={'1139860081'}
+               fullThumbnail={`https://vumbnail.com/${1139860081}.jpg`}
         />
     );
 };

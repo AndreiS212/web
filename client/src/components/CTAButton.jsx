@@ -17,7 +17,7 @@ const CTAButton = ({ text = "Spune-mi despre evenimentul vostru", to = "/contact
             onClick={() => navigate(to)}
             style={{
                 padding: isMobile ? "5px 15px" : "12px 32px",
-                fontSize: isMobile ? "0.5rem" : "1.1rem",
+                fontSize: isMobile ? "0.8rem" : "1.1rem",
                 backgroundColor: "transparent",
                 border: "1px solid #d2b6a2",
                 color: "#d2b6a2",

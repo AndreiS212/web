@@ -7,10 +7,9 @@ const NuntaNicoletaMarius = () => {
     ]
     return (
         <Cuplu name={"Nicoleta & Marius"}
-               header={''}
-               videoId={'1103046588'}
-               photos={photos}
-               thumbnail={''}
+               header={`https://vumbnail.com/${1103046588}.jpg`}
+               fullVideoId={'1135741178'}
+               fullThumbnail={`https://vumbnail.com/${1135741178}.jpg`}
         />
     )
 };

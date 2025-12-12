@@ -31,6 +31,16 @@
     text-transform: uppercase;
 }
 
+/*.overlay:visited,*/
+.overlay:hover,
+/*.overlay:active,*/
+.overlay:focus {
+    text-decoration: none !important;
+    color: #d2b6a2;
+    /*-webkit-tap-highlight-color: transparent;*/
+}
+
+
 /* Medium screens – shift left slightly */
 @media (max-width: 1200px) {
     .image-container img {

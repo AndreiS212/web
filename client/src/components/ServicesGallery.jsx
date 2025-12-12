@@ -21,19 +21,56 @@ const ServicesGallery = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    // const handleClick = (link) => {
+    //     if (isMobile) {
+    //         const [path, hash] = link.split("#");
+    //
+    //         navigate(path);
+    //
+    //         if (hash) {
+    //             const el = document.getElementById(hash);
+    //             if (el) {
+    //                 const offset = -300;
+    //                 const y = el.getBoundingClientRect().top + window.scrollY + offset;
+    //
+    //                 window.scrollTo({
+    //                     top: y,
+    //                     behavior: "instant"
+    //                 });
+    //             }
+    //         }
+    //
+    //         // setTimeout(() => {
+    //         //     if (hash) {
+    //         //         const el = document.getElementById(hash);
+    //         //         if (el) {
+    //         //             const offset = -120;
+    //         //             const y = el.getBoundingClientRect().top + window.scrollY + offset;
+    //         //
+    //         //             window.scrollTo({
+    //         //                 top: y,
+    //         //                 behavior: "instant"
+    //         //             });
+    //         //         }
+    //         //     }
+    //         // }, 80);
+    //     } else {
+    //         window.location.href = link;
+    //     }
+    // };
+
+    const handleClick = (link) => navigate(link);
+
+
     return (
         <Row gutter={[16, 16]}>
             {photos.map((photo, index) => (
                 <Col key={index} xs={24} sm={12} md={6}>
-                    <a
-                        href={photo.link}
+                    <div
                         className="image-container"
                         style={{
                             cursor: 'pointer',
                             display: 'block',
-                            // height: isMobile ? '500px' : '800px',
-                            // width: isMobile ? '370px' : '340px',
-                            // marginLeft: isMobile ? '-30px' : '0'
                         }}
                     >
                         <img
@@ -46,16 +83,17 @@ const ServicesGallery = () => {
                                 objectFit: 'cover',
                             }}
                         />
-                        <div
+                        <a
+                            href={photo.link}
                             className="overlay"
                             style={{
-                                fontSize: isMobile ? '0.9rem' : '1.2rem',
-                                padding: isMobile ? '6px 10px' : '10px 20px',
+                                fontSize: isMobile ? "0.9rem" : "1.2rem",
+                                padding: isMobile ? "6px 10px" : "10px 20px",
                             }}
                         >
                             {photo.text}
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </Col>
             ))}
         </Row>

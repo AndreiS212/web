@@ -5,15 +5,33 @@ const ScrollToHashElement = () => {
     const location = useLocation();
 
     useEffect(() => {
-        if (location.hash) {
-            const el = document.getElementById(location.hash.slice(1));
-            if (el) {
-                // Optional offset if you have a fixed header (e.g. 100px)
-                const yOffset = -100;
-                const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                window.scrollTo({ top: y }); // No 'behavior' means instant jump
+        if (!location.hash) return;
+
+        const id = location.hash.replace("#", "");
+        const HEADER_OFFSET = window.innerWidth <= 768 ? 70 : 120;
+
+        const scrollToElement = () => {
+            const el = document.getElementById(id);
+            if (!el) return false;
+
+            const top = el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+            window.scrollTo({ top, behavior: "auto" });
+            return true;
+        };
+
+        // Try immediately
+        if (scrollToElement()) return;
+
+        // Retry until the element and its images/videos fully load (max 20 tries)
+        let attempts = 0;
+        const interval = setInterval(() => {
+            attempts++;
+            if (scrollToElement() || attempts > 20) {
+                clearInterval(interval);
             }
-        }
+        }, 100);
+
+        return () => clearInterval(interval);
     }, [location]);
 
     return null;

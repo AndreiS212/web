@@ -6,8 +6,8 @@ import { MenuOutlined } from "@ant-design/icons";
 import './CustomHeader.css';
 
 const CustomHeader = () => {
-    const leftItems = ["Acasa", "Povestea mea", "Film"];
-    const rightItems = ["Cadre", "Servicii", "Contact"];
+    const leftItems = [ "Povestea mea", "Film"];
+    const rightItems = ["Servicii", "Contact"];
     const [drawerVisible, setDrawerVisible] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 

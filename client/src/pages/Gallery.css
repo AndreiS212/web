@@ -10,3 +10,15 @@
 .custom-anchor .ant-anchor-ink-visible {
     background-color: #d2b6a2 !important;
 }
+
+/* Desktop */
+.anchor-target {
+    scroll-margin-top: 120px;
+}
+
+@media (max-width: 768px) {
+    .anchor-target {
+        scroll-margin-top: 70px;
+    }
+}
+

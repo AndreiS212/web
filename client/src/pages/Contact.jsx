@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Layout, Form, Input, Button, Space, Row, Col, message, Spin } from 'antd';
 import { MailOutlined, PhoneOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { motion } from 'framer-motion';
@@ -29,6 +29,16 @@ const labelStyle = {
 const Contact = () => {
     const [loading, setLoading] = useState(false);
     const [form] = Form.useForm();
+    const [isMobile, setIsMobile] = useState(false);
+    const [successMessage, setSuccessMessage] = useState(""); // <-- new state
+    const [errorMessage, setErrorMessage] = useState("");     // <-- optional for errors
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const handleSubmit = async (values) => {
         setLoading(true);
@@ -41,11 +51,14 @@ const Contact = () => {
             const data = await res.json();
 
             if (data.success) {
-                message.success("Mesajul a fost trimis cu succes!");
+                setSuccessMessage("Mesajul a fost trimis cu succes!");
+                setErrorMessage("");
                 form.resetFields();
             } else {
-                message.error("A apărut o eroare la trimiterea mesajului.");
+                setErrorMessage("A apărut o eroare la trimiterea mesajului.");
+                setSuccessMessage("");
             }
+
         } catch (error) {
             console.error(error);
             message.error("Eroare la trimiterea mesajului.");
@@ -205,11 +218,18 @@ const Contact = () => {
                                     {loading ? <Spin size="small" /> : "Trimite mesajul"}
                                 </Button>
                             </Form.Item>
+                            {/* Success / Error message */}
+                            {(successMessage || errorMessage) && (
+                                <div style={{ textAlign: 'center', marginTop: 16, fontWeight: 500 }}>
+                                    {successMessage && <span style={{ color: 'green' }}>{successMessage}</span>}
+                                    {errorMessage && <span style={{ color: 'red' }}>{errorMessage}</span>}
+                                </div>
+                            )}
                         </Form>
                     </Col>
 
                     {/* Contact Info */}
-                    <Col xs={24} md={10} style={{ paddingRight: 0, marginRight: '30px', marginTop: "100px" }}>
+                    <Col xs={24} md={10} style={{ paddingRight: 0, marginRight: '30px', marginTop: isMobile ? "-50px" : "100px" }}>
                         <div style={{ textAlign: 'center', paddingRight: 24 }}>
                             <DecoratedTitle text="Detalii de contact" align="center" />
                         </div>
@@ -223,7 +243,8 @@ const Contact = () => {
                                 fontSize: '1.1rem',
                                 color: '#d2b6a2',
                                 textAlign: 'center',
-                                fontFamily: "Playfair Display"
+                                fontFamily: "Playfair Display",
+                                marginLeft: "-20px"
                             }}
                         >
                             {[{

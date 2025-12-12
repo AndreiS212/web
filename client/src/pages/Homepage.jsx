@@ -39,13 +39,19 @@ const Homepage = () => {
     }, []);
 
     const carouselItems = [
-        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262039/lovestory1-19.jpg',
-        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262053/nunta-3-5_sd0kny.jpg',
         'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262036/lovestory1-10_t6rux6.jpg',
         'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262055/nunta3-7_cjijci.jpg',
         'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262053/nunta3-4_cevogz.jpg',
         'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262043/nunta1-9_hc85kp.jpg',
-        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262050/nunta2-12_rwycep.jpg'
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1759669216/nunta3-8_weqbqk.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262055/nunta-3-9_ta4v9o.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262053/nunta-3-3_nczvvm.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262046/nunta2-4_ldnfyk.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262042/nunta-1-8_zqartn.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262037/lovestory1-16_y7fpsf.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262029/love1-5_gp9kcy.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262021/cc1-10_sybzec.jpg',
+        'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262023/cununie1_amizrl.jpg',
     ];
 
 
@@ -129,7 +135,7 @@ const Homepage = () => {
                     marginTop: isMobile ? '3vh' : isTablet ? '5vh' : '-8vh', // responsive
                 }}>
                     <h1 style={{
-                        fontSize: 'clamp(1.0rem, 2vw, 2rem)', // scales with screen
+                        fontSize: 'clamp(1.2rem, 2vw, 2rem)',
                         textTransform: 'uppercase',
                         marginBottom: '2vh', // responsive
                         marginTop: '-10vh',
@@ -140,7 +146,7 @@ const Homepage = () => {
                     }}>Povestea voastră prin obiectivul meu</h1>
 
                     <p style={{
-                        fontSize: 'clamp(0.8rem, 1.2vw, 1.15rem)',
+                        fontSize: 'clamp(1.0rem, 1.2vw, 1.15rem)',
                         lineHeight: 1.7,
                         maxWidth: '90%',
                         fontFamily: 'Segoe UI, sans-serif',
@@ -207,6 +213,7 @@ const Homepage = () => {
                                         textAlign: 'center',
                                         height: isMobile ? '150px' : '400px',
                                         marginBottom: isMobile ? '2rem' : '0',
+                                        aspectRatio: isMobile ? '1/1' : '16/9',
                                     }}
                                 >
                                     <VideoThumbnailPlayer videoId={story.videoId} thumbnailSrc="" />

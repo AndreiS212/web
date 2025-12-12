@@ -137,9 +137,15 @@ header, .custom-header {
 /* mobile overrides */
 @media (max-width: 768px) {
     .carousel-image {
-        object-fit: contain;
-        margin-top:-18vh;
-        height: 45vh;
+        object-fit: cover; /* fills the container, no empty space */
+        width: 100%;
+        height: 40vh;       /* taller for mobile */
+        margin-top: 0;      /* remove negative margin */
+        border-radius: 4px; /* optional, adds a nice rounded effect */
+    }
+
+    .carousel-wrapper {
+        padding: 0 8px;    /* reduce horizontal padding on small screens */
     }
 }
 
@@ -178,14 +184,14 @@ header, .custom-header {
     .carousel-arrow.left {
         font-size: 2.5vh;      /* slightly smaller on mobile */
         padding: 0.8vh;
-        top: 30%;              /* raise arrows a bit higher */
+        top: 50%;              /* raise arrows a bit higher */
         transform: translateY(-50%);
     }
 
     .carousel-arrow.right {
         font-size: 2.5vh;      /* slightly smaller on mobile */
         padding: 0.8vh;
-        top: 30%;              /* raise arrows a bit higher */
+        top: 50%;              /* raise arrows a bit higher */
         transform: translateY(-50%);
     }
 }
@@ -202,7 +208,7 @@ header, .custom-header {
 /* Mobile adjustments (optional, if you want them slightly above bottom) */
 @media (max-width: 768px) {
     .carousel-wrapper .slick-dots {
-        bottom: calc(12vh);   /* small offset from bottom */
+        bottom: calc(1vh);   /* small offset from bottom */
     }
 }
 
@@ -238,7 +244,7 @@ header, .custom-header {
         height: 75vh;
     }
     .carousel-image {
-        height: 45vh;
+        height: 30vh;
     }
     .stories-container {
         flex-direction: column;
@@ -249,7 +255,7 @@ header, .custom-header {
         margin-top: -3vh;
     }
     .services-section {
-        margin-top: -10vh;
+        margin-top: -1vh;
     }
 }
 
@@ -391,7 +397,7 @@ html {
 /* Push stories section lower on mobile */
 @media (max-width: 768px) {
     .stories-section {
-        margin-top: 8vh;  /* adjust this value */
+        /*margin-top: 13vh;  !* adjust this value *!*/
     }
     .stories-container {
         margin-bottom: 4vh;

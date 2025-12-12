@@ -8,6 +8,7 @@ import "./Gallery.css";
 import DecoratedTitle from "../components/DecoratedTitle";
 import ScrollToHashElement from "../components/ScrollToHashElement";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const { Content } = Layout;
 
@@ -31,34 +32,36 @@ const VerticalLine = ({ isMobile }) => (
     </svg>
 );
 
-const NamesWithDecoration = ({ names, locationText = "- Locatie -", eveniment, isMobile }) => {
+const NamesWithDecoration = ({ names, locationText = "- Locatie -", eveniment, isMobile, showButton = false }) => {
     const navigate = useNavigate();
+    const getButtonText = () => {
+        if (names === "Vlad") return "Povestea lui";
+        return "Povestea lor";
+    };
     return (
         <div
             style={{
                 textAlign: "center",
-                padding: isMobile ? "2px 0" : "5px 0", // smaller padding
+                padding: 0,
                 fontFamily: "Playfair Display",
                 textTransform: "uppercase",
-                marginBottom: isMobile ? '80px' : '0px',
-                marginTop: isMobile ? '30px' : '0px'
             }}
         >
             <VerticalLine isMobile={isMobile} />
             <p
                 className="names"
                 style={{
-                    margin: isMobile ? "2px 0 1px" : "5px 0 3px", // smaller margins
-                    fontSize: isMobile ? "16px" : "18px",
+                    margin: 0,
+                    fontSize: isMobile ? "14px" : "18px",
                     fontWeight: 500,
                 }}
             >
                 {names}
             </p>
-            <p style={{ fontSize: isMobile ? "10px" : "16px", margin: isMobile ? "1px 0" : "3px 0" }}>
-                {locationText}
-            </p>
-            <Button style={{
+            {/*<p style={{ fontSize: isMobile ? "10px" : "16px", margin: isMobile ? "1px 0" : "3px 0" }}>*/}
+            {/*    {locationText}*/}
+            {/*</p>*/}
+            {showButton && (<Button style={{
                 padding: isMobile ? '12px 20px' : '12px 28px',
                 background: 'linear-gradient(to right, #d2b6a2, #e6d2c3)',
                 color: '#000',
@@ -72,16 +75,17 @@ const NamesWithDecoration = ({ names, locationText = "- Locatie -", eveniment, i
                 transition: 'all 0.3s ease',
                 boxShadow: '0 4px 10px rgba(210, 182, 162, 0.3)',
                 marginBottom: '20px',
+                marginTop: '5px'
             }}
                     onClick={() => navigate(eveniment)}>
-                Povestea lor
-            </Button>
+                {getButtonText()}
+            </Button>)}
             <VerticalLine isMobile={isMobile} />
         </div>
     );
 };
 
-const VideoSectionRow = ({ videoId, thumbnailSrc, names, locationText, eveniment, reverse = false }) => {
+const VideoSectionRow = ({ videoId, thumbnailSrc, names, eveniment, reverse = false, showButton }) => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -95,36 +99,33 @@ const VideoSectionRow = ({ videoId, thumbnailSrc, names, locationText, eveniment
         <div
             style={{
                 display: "flex",
-                flexDirection: isMobile ? "column" : reverse ? "row-reverse" : "row", // <-- column on mobile
-                marginBottom: isMobile ? "0.5rem" : "1.5rem",
-                marginTop: isMobile ? "90px" : "0px",
+                flexDirection: isMobile ? "column" : reverse ? "row-reverse" : "row",
+                alignItems: isMobile ? "stretch" : "center", // vertically center on desktop
                 gap: isMobile ? "4px" : "10px",
+                marginBottom: "20px",
             }}
         >
+            {/* Video */}
             <div
                 style={{
                     width: isMobile ? "100%" : "70%",
-                    flexGrow: 1,
-                    height: isMobile ? "150px" : "600px",
+                    aspectRatio: isMobile ? '1/1' : '16 / 9',
                 }}
             >
                 <VideoThumbnailPlayer videoId={videoId} thumbnailSrc={thumbnailSrc} />
             </div>
 
+            {/* Text */}
             <div
                 style={{
                     width: isMobile ? "100%" : "30%",
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center",
+                    alignItems: isMobile ? "flex-start" : "center", // top on mobile, center on desktop
+                    marginTop: isMobile ? "-12vh" : "5vh"
                 }}
             >
-                <NamesWithDecoration
-                    names={names}
-                    locationText={locationText}
-                    eveniment={eveniment}
-                    isMobile={isMobile}
-                />
+                <NamesWithDecoration names={names} eveniment={eveniment} isMobile={isMobile} showButton={showButton}/>
             </div>
         </div>
     );
@@ -132,6 +133,7 @@ const VideoSectionRow = ({ videoId, thumbnailSrc, names, locationText, eveniment
 
 const Gallery = () => {
     const [isMobile, setIsMobile] = useState(false);
+    const location = useLocation()
 
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -139,6 +141,30 @@ const Gallery = () => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    useEffect(() => {
+        const hash = location.hash?.slice(1);
+        if (!hash) return;
+
+        const offset = -120;
+
+        const scroll = () => {
+            const el = document.getElementById(hash);
+            if (!el) return;
+
+            const y = el.getBoundingClientRect().top + window.pageYOffset + offset;
+            window.scrollTo({ top: y, behavior: "instant" });
+        };
+
+        // Try immediately
+        requestAnimationFrame(scroll);
+
+        // Try again after images load
+        window.addEventListener("load", scroll);
+
+        return () => window.removeEventListener("load", scroll);
+    }, [location.hash]);
+
 
     const sections = [
         {
@@ -152,7 +178,8 @@ const Gallery = () => {
                     thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262023/cununie1_amizrl.jpg',
                     names: "Roxana & Remus",
                     locationText: "Locatie",
-                    eveniment: '/CununieRoxanaRemus'
+                    eveniment: '/CununieRoxanaRemus',
+                    showButton: true
                 },
             ],
         },
@@ -167,56 +194,64 @@ const Gallery = () => {
                     thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262053/nunta-3-3_nczvvm.jpg',
                     names: "Roxana & Dragos",
                     locationText: "Locatie",
-                    eveniment: '/NuntaRoxanaDragos'
+                    eveniment: '/NuntaRoxanaDragos',
+                    showButton: true
                 },
                 {
                     videoId: "1095230919",
                     thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262042/nunta-1-8_zqartn.jpg',
                     names: "Andreea & Alin",
                     locationText: "Locatie",
-                    eveniment: '/NuntaAndreeaAlin'
+                    eveniment: '/NuntaAndreeaAlin',
+                    showButton: true
                 },
                 {
                     videoId: "1045290053",
                     thumbnailSrc: null,
                     names: "Gabriela & Andrei",
                     locationText: "Locatie",
-                    eveniment: '/NuntaGabrielaAndrei'
+                    eveniment: '/GabrielaAndrei',
+                    showButton: true
                 },
                 {
                     videoId: "1103046588",
                     thumbnailSrc: null,
                     names: "Nicoleta & Marius",
                     locationText: "Locatie",
-                    eveniment: '/NuntaNicoletaMarius'
+                    eveniment: '/NuntaNicoletaMarius',
+                    showButton: false
                 },
                 {
                     videoId: "1103040938",
                     thumbnailSrc: null,
                     names: "Cristina & Alin",
                     locationText: "Locatie",
-                    eveniment: '/NuntaCristinaAlin'
+                    eveniment: '/NuntaCristinaAlin',
+                    showButton: false
                 },
                 {
                     videoId: "1048483085",
                     thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262046/nunta2-3_wu7vq8.jpg',
                     names: "Claudia & Dragos",
                     locationText: "Locatie",
-                    eveniment: '/NuntaClaudiaDragos'
+                    eveniment: '/NuntaClaudiaDragos',
+                    showButton: true
                 },
                 {
                     videoId: "1111732497",
                     thumbnailSrc: null,
                     names: "Adnana & Alin",
                     locationText: "Locatie",
-                    eveniment: '/NuntaAdnanaAlin'
+                    eveniment: '/NuntaAdnanaAlin',
+                    showButton: false
                 },
                 {
                     videoId: "1116309542",
                     thumbnailSrc: null,
                     names: "Teodora & Teodor",
                     locationText: "Locatie",
-                    eveniment: '/NuntaTeodoraTeodor'
+                    eveniment: '/NuntaTeodoraTeodor',
+                    showButton: false
                 },
             ],
         },
@@ -231,7 +266,8 @@ const Gallery = () => {
                     thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262035/lovestory1-9_yenlsw.jpg',
                     names: "Gabriela & Andrei",
                     locationText: "Locatie",
-                    eveniment: '/LoveStoryGabrielaAndrei'
+                    eveniment: '/GabrielaAndrei',
+                    showButton: true
                 },
             ],
         },
@@ -246,7 +282,8 @@ const Gallery = () => {
                     thumbnailSrc: 'https://res.cloudinary.com/dbapyuq1g/image/upload/v1753262019/botez1-5.jpg',
                     names: "Vlad",
                     locationText: "Locatie",
-                    eveniment: '/BotezVlad'
+                    eveniment: '/BotezVlad',
+                    showButton: false
                 },
             ],
         },
@@ -309,9 +346,9 @@ const Gallery = () => {
                             </div>
                         )}
                         {sections.map(({ id, title, align, reverse, videos }) => (
-                            <div id={id} key={id} style={{ marginBottom: "3rem" }}>
+                            <div id={id} className="anchor-target" key={id} style={{ marginBottom: '3rem' }}>
                                 <DecoratedTitle text={title} align={align} />
-                                {videos.map(({ videoId, thumbnailSrc, names, locationText, eveniment }, idx) => (
+                                {videos.map(({ videoId, thumbnailSrc, names, locationText, eveniment, showButton }, idx) => (
                                     <VideoSectionRow
                                         key={videoId + idx}
                                         videoId={videoId}
@@ -320,6 +357,7 @@ const Gallery = () => {
                                         locationText={locationText}
                                         eveniment={eveniment}
                                         reverse={reverse}
+                                        showButton={showButton}
                                     />
                                 ))}
                             </div>

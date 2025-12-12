@@ -9,11 +9,10 @@ import Gallery from './pages/Gallery';
 import Cadre from "./pages/Cadre";
 import BotezVlad from "./pages/cupluri/BotezVlad";
 import CununieRoxanaRemus from "./pages/cupluri/CununieRoxanaRemus";
-import LoveStoryGabrielaAndrei from "./pages/cupluri/LoveStoryGabrielaAndrei";
 import NuntaAndreeaAlin from "./pages/cupluri/NuntaAndreeaAlin";
 import NuntaClaudiaDragos from "./pages/cupluri/NuntaClaudiaDragos";
 import NuntaCristinaAlin from "./pages/cupluri/NuntaCristinaAlin";
-import NuntaGabrielaAndrei from "./pages/cupluri/NuntaGabrielaAndrei";
+import GabrielaAndrei from "./pages/cupluri/GabrielaAndrei";
 import NuntaNicoletaMarius from "./pages/cupluri/NuntaNicoletaMarius";
 import NuntaRoxanaDragos from "./pages/cupluri/NuntaRoxanaDragos";
 import NuntaAdnanaAlin from "./pages/cupluri/NuntaAdnanaAlin";
@@ -32,11 +31,10 @@ function App() {
           <Route path="/cadre" element={<Cadre />} />
           <Route path="/BotezVlad" element={<BotezVlad />} />
           <Route path="/CununieRoxanaRemus" element={<CununieRoxanaRemus />} />
-          <Route path="/LoveStoryGabrielaAndrei" element={<LoveStoryGabrielaAndrei />} />
           <Route path="/NuntaAndreeaAlin" element={<NuntaAndreeaAlin />} />
           <Route path="/NuntaClaudiaDragos" element={<NuntaClaudiaDragos />} />
           <Route path="/NuntaCristinaAlin" element={<NuntaCristinaAlin />} />
-          <Route path="/NuntaGabrielaAndrei" element={<NuntaGabrielaAndrei />} />
+          <Route path="/GabrielaAndrei" element={<GabrielaAndrei />} />
           <Route path="/NuntaNicoletaMarius" element={<NuntaNicoletaMarius />} />
           <Route path="/NuntaRoxanaDragos" element={<NuntaRoxanaDragos />} />
           <Route path="/NuntaAdnanaAlin" element={<NuntaAdnanaAlin />} />
