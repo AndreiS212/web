@@ -123,13 +123,14 @@ const VideoThumbnailPlayer = ({ videoId, style, overlayText, thumbnailSrc, autoP
             </div>
         ) : (
             <iframe
-                src={`https://player.vimeo.com/video/${videoId}?autoplay=1&dnt=1`}
+                src={`https://player.vimeo.com/video/${videoId}?autoplay=1&dnt=1&controls=1&title=0&byline=0&portrait=1&autopause=0&autoplay=0&muted=0`}
                 style={{
                   width: '100%',
                   height: '100%',
                   position: 'absolute',
                   top: 0,
                   left: 0,
+                  objectFit: 'cover'
                 }}
                 frameBorder="0"
                 allow="autoplay; fullscreen"

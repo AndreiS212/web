@@ -38,6 +38,10 @@ const Cuplu = ({
         }
     }
 
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "instant" });
+    }, []);
+
 
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -74,37 +78,16 @@ const Cuplu = ({
 
             <Content style={{ padding: '40px 5vw', textAlign: 'center' }}>
                 {storyVideoId && (
-                    <div style={{ width: '100%', marginBottom: '60px' }}>
-                        <DecoratedTitle
-                            text={"Povestea " + getTitle()}
-                            align="right"/>
-                        {/*<div style={{*/}
-                        {/*    width: '100%',*/}
-                        {/*    maxWidth: '1200px',*/}
-                        {/*    margin: '0 auto',*/}
-                        {/*    aspectRatio: isMobile ? '1/1' : '16 / 9',*/}
-                        {/*    overflow: 'hidden',*/}
-                        {/*    boxShadow: '0 8px 20px rgba(0,0,0,0.4)'*/}
-                        {/*}}>*/}
-                            <VideoThumbnailPlayer videoId={storyVideoId} thumbnailSrc={storyThumbnail} />
-                        {/*</div>*/}
+                    <div style={{ width: '100%', marginBottom: '60px', aspectRatio: isMobile ? '1/1' : '16 / 9' }}>
+                        <DecoratedTitle text={"Povestea " + getTitle()} align="right"/>
+                        <VideoThumbnailPlayer videoId={storyVideoId} thumbnailSrc={storyThumbnail} />
                     </div>
                 )}
 
                 {fullVideoId && (
-                    /* Full-width Video */
-                    <div style={{ width: '100%', marginBottom: '60px' }}>
+                    <div style={{ width: '100%', marginBottom: '60px', aspectRatio: isMobile ? '1/1' : '16 / 9' }}>
                         <DecoratedTitle text="Filmul Complet" align="left"/>
-                        {/*<div style={{*/}
-                        {/*    width: '100%',*/}
-                        {/*    maxWidth: '1200px',*/}
-                        {/*    margin: '0 auto',*/}
-                        {/*    aspectRatio: isMobile ? '1/1' : '16 / 9',*/}
-                        {/*    overflow: 'hidden',*/}
-                        {/*    boxShadow: '0 8px 20px rgba(0,0,0,0.4)'*/}
-                        {/*}}>*/}
-                            <VideoThumbnailPlayer videoId={fullVideoId} thumbnailSrc={fullThumbnail} />
-                        {/*</div>*/}
+                        <VideoThumbnailPlayer videoId={fullVideoId} thumbnailSrc={fullThumbnail} />
                     </div>
                 )}
 

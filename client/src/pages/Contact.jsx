@@ -34,6 +34,10 @@ const Contact = () => {
     const [errorMessage, setErrorMessage] = useState("");     // <-- optional for errors
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "instant" });
+    }, []);
+
+    useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
         handleResize();
         window.addEventListener("resize", handleResize);
@@ -43,7 +47,7 @@ const Contact = () => {
     const handleSubmit = async (values) => {
         setLoading(true);
         try {
-            const res = await fetch("/contact", {
+            const res = await fetch("/contact.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(values),
